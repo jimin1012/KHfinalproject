@@ -1,0 +1,204 @@
+/* ---- 신고목록 ---- */
+
+main{
+    width: 100%;
+}
+
+h3{
+    text-align: justify;
+}
+
+
+.main-box{
+    max-width: 1000px;
+    height: 600px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.main-box > div:first-child{
+    margin-bottom: 10px;
+}
+
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.main-header > div:nth-of-type(2){
+    display: flex;
+    text-align: center;
+    line-height: 30px;
+}
+
+
+/* 조건, 날짜 검색 영역 */
+#searchReserve{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 700px;
+}
+
+#searchReserve > div:nth-of-type(1){
+    display: flex;
+}
+
+
+#searchKey{
+    width: 80px;
+    text-align: center;
+}
+
+#inputQuery{
+    padding-left: 5px;
+}
+
+#inputQuery:focus{
+    outline: none;
+}
+
+
+#searchReserve > div:nth-of-type(2){
+    width: 450px;
+    text-align: center;
+    background-color: rgb(197, 207, 212);;
+    /* border-radius: 5px; */
+    padding: 5px 0;
+    color: black;
+    font-weight: bold;
+}
+
+.selectDate{
+    height: 100%;
+}
+
+/* 조회 버튼 */
+#searchResBtn{
+    width: 50px;
+    height: 25px;
+    background-color: black;
+    color: white;
+    border: 0;
+    vertical-align: middle;
+}
+
+
+/* 예약상태 조회 */
+.selectReserveState{
+    width: 270px;
+    background-color: #ccc;
+}
+
+.selectReserveState > span{
+    width: 90px;
+}
+
+.selectReserveState > span > a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: black;
+    text-decoration:none ;
+}
+
+.selected{
+    background-color: rgb(112, 144, 152);
+    font-weight: bold;
+}
+
+
+
+/* 테이블 */
+.main-table{
+    height: 525px;
+    width: 100%;
+}
+
+#reserveTable{
+    table-layout: fixed;
+    border-collapse: collapse;
+    max-width: 100%;
+    min-height: 520px;
+    display: block;
+
+    border-bottom: 3px solid rgb(112, 144, 152);
+}
+
+
+#reserveTable > thead{
+    background-color: #ccc;
+    height: 30px;
+}
+
+#reserveTable > tbody{
+    text-align: center;
+    
+    display: block;
+    width: 995px;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+#reserveTable th{
+    font-size: 0.8em;
+}
+
+
+#reserveTable th:nth-child(1){ width: 80px; }
+#reserveTable th:nth-child(2){ width: 100px; }
+#reserveTable th:nth-child(3){ width: 250px; }
+#reserveTable th:nth-child(4){ width: 200px; }
+#reserveTable th:nth-child(5){ width: 80px; }
+#reserveTable th:nth-child(6){ width: 150px; }
+#reserveTable th:nth-child(7){ width: 135px; }
+
+
+
+
+#reserveTable > tbody tr{ 
+    width: 100%;
+    border-bottom: 2px solid #ccc;
+    font-size: 0.8em;
+}
+
+#reserveTable td{
+    height: 30px;
+}
+
+#reserveTable td:nth-child(1){ width: 79px; }
+#reserveTable td:nth-child(2){ width: 100px; }
+#reserveTable td:nth-child(3){ 
+    max-width: 250px; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+#reserveTable td:nth-child(4){ width: 200px; }
+#reserveTable td:nth-child(5){ width: 80px; }
+#reserveTable td:nth-child(6){ width: 150px; }
+#reserveTable td:nth-child(7){ width: 123px; }
+
+
+
+#reserveTable > tbody tr:hover{
+    
+    background-color: rgb(112, 144, 152);
+    color: white;
+}
+
+/* text-overflow로 숨겨진 예약 내역 확인 */
+#reserveTable td:nth-child(3)::before{
+    content: attr(title);
+}
+
+
+#reserveTable select:hover {
+    cursor: pointer;
+}
+
+#reserveTable td:hover{
+    cursor: default;
+}

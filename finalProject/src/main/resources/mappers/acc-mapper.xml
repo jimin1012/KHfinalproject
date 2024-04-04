@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="accMapper">
+
+
+	<resultMap type="Acc" id="acc_rm">
+		<id property="accNo" column="ACC_NO" />
+
+		<result property="accName" column="ACC_NAME" />
+		<result property="accTel" column="ACC_TEL" />
+		<result property="accAddr" column="ACC_ADDR" />
+		<result property="accStFl" column="ACC_ST_FL" />
+		<result property="bossNo" column="BOSS_NO" />
+		<result property="accCategory" column="ACC_CATEGORY" />
+		<result property="openDate" column="OPEN_DATE" />
+		
+		<result property="reviewCount" column="REVIEW_COUNT" />
+		<result property="rate" column="AVG_RATE" />
+		<result property="price" column="ROOM_PRICE" />
+
+		<result property="profileImage" column="PROFILE_IMG" />
+		<result property="thumbnail" column="THUMBNAIL" />
+		
+		<!-- collection 태그
+			 select로 조회된 결과를 컬렉션(List)에 담아
+			 지정된 필드에 세팅
+			 
+			 property : List를 담을 DTO의 필드명
+			 select : 실행할 select의 id
+			 column : 조회 결과 중 지정된 컬럼의 값을 파라미터로 전달
+			 javaType : List(컬렉션)의 타임을 지정
+			 ofType : List(컬렉션)의 제네릭(타입 제한) 지정
+		 -->
+		 <collection property="imageList"
+		 			 select="selectImageList"
+		 			 column="ACC_NO"
+		 			 javaType="java.util.ArrayList"
+		 			 ofType="Image">
+		 </collection>
+		 
+
+		
+	</resultMap>
+	
+	<resultMap type="AccCode" id="accCode_rm">
+		<id property="accCode" column="ACC_CODE" />
+		
+		<result property="roomCapacity" column="ROOM_CAPACITY" />
+		<result property="accType" column="ACC_TYPE" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="accNo" column="ACC_NO" />
+		<result property="roomCheckIn" column="ROOM_CHECKIN" />
+		<result property="roomCheckOut" column="ROOM_CHECKOUT" />
+	</resultMap>
+	
+	<resultMap type="Review" id="review_rm">
+		<id property="accReviewNo" column="A_REVIEW_NO" />
+
+		<result property="accReviewContent" column="A_REVIEW_CONTENT" />
+		<result property="accCreateDate" column="A_CREATE_DATE" />
+		<result property="accReviewDelFl" column="A_REVIEW_DEL_FL" />
+		<result property="accNo" column="ACC_NO" />
+		<result property="userNo" column="USER_NO" />
+	</resultMap>
+	
+	<resultMap type="Image" id="image_rm">
+		<id property="accImgNo" column="ACC_IMG_NO" />
+
+		<result property="accImgRename" column="ACC_IMG_RENAME" />
+		<result property="accImgOriginal" column="ACC_IMG_ORIGINAL" />
+		<result property="accImgLevel" column="ACC_IMG_LEVEL" />
+		<result property="accImgPath" column="ACC_IMG_PATH" />
+		<result property="accNo" column="ACC_NO" />
+		
+		<result property="accImagePath" column="IMAGEPATH" />
+	</resultMap>
+	
+	<resultMap type="Rate" id="rate_rm">
+		<id property="rateNo" column="RATE_NO" />
+
+		<result property="accCleanRate" column="A_CLEAN_RATE" />
+		<result property="accFacRate" column="A_FAC_RATE" />
+		<result property="accKindRate" column="A_KIND_RATE" />
+		<result property="accReviewNo" column="A_REVIEW_NO" />
+		
+		<result property="avgCleanRate" column="AVG_CLEAN_RATE" />
+		<result property="avgFacRate" column="AVG_FAC_RATE" />
+		<result property="avgKindRate" column="AVG_KIND_RATE" />
+		
+		
+	</resultMap>
+	
+	
+	<resultMap type="AccReserve" id="res_rm">
+	
+		<id property="reservationNo" column="RESERVATION_NO" />
+
+		<result property="reservationName" column="RESERVATION_NAME" />
+		<result property="reservationDelFl" column="RESERVATION_DEL_FL" />
+		<result property="reservStartDate" column="RESERV_START_DATE" />
+		<result property="reservEndDate" column="RESERV_END_DATE" />
+		
+		<result property="reviewStartDate" column="REVIEW_START_DATE" />
+		
+		<result property="price" column="PRICE" />
+		<result property="reservType" column="RESERV_TYPE" />
+		<result property="payTime" column="PAY_TIME" />
+		<result property="reservUid" column="RESERV_UID" />
+		<result property="userNo" column="USER_NO" />
+		<result property="accNo" column="ACC_NO" />
+		<result property="resPeople" column="RES_PEOPLE" />
+		<result property="accCode" column="ACC_CODE" />
+
+	</resultMap>
+
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM ACC
+		WHERE ACC_ADDR LIKE '%${where}%'
+	</select>
+	
+ 	<!-- 특정 게시글 이미지 조회 -->
+    <select id="selectImageList" resultMap="image_rm">
+       SELECT * FROM ACC_IMAGE
+       WHERE ACC_NO = #{accNo}
+       ORDER BY ACC_IMG_LEVEL
+    </select>
+
+	<select id="searchList" resultMap="acc_rm">
+        SELECT ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, THUMBNAIL, ACC_CODE, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE
+		FROM (
+		    SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		        I.ACC_IMG_PATH || I.ACC_IMG_RENAME AS THUMBNAIL,
+		        B.ACC_CODE, A.ROOM_CAPACITY, B.ACC_TYPE, B.ROOM_PRICE,
+		        ROW_NUMBER() OVER (PARTITION BY ACC.ACC_NO ORDER BY B.ROOM_PRICE) AS RN
+		    FROM ACC
+		    JOIN ACC_IMAGE I ON ACC.ACC_NO = I.ACC_NO
+		    JOIN (
+		        SELECT ACC_NO, SUM(ROOM_CAPACITY) AS ROOM_CAPACITY, COUNT(*) AS ROOM_COUNT
+		        FROM ACC_GRADE
+		        GROUP BY ACC_NO
+		    ) A ON ACC.ACC_NO = A.ACC_NO
+		    JOIN ACC_GRADE B ON A.ACC_NO = B.ACC_NO
+		    WHERE ACC.ACC_ST_FL = 'Y'
+		    AND ACC.ACC_ADDR LIKE '%${where}%'
+		    AND I.ACC_IMG_LEVEL = 0
+		)
+		WHERE RN = 1
+		ORDER BY ROOM_PRICE
+	</select>
+	
+	<select id="searchRate" resultMap="acc_rm">
+		SELECT ROUND(AVG((AC.A_CLEAN_RATE + AC.A_FAC_RATE + AC.A_KIND_RATE) / 3), 1) AS AVG_RATE
+		FROM ACC_REVIEW AR
+		JOIN ACC_RATE AC ON AR.A_REVIEW_NO = AC.A_REVIEW_NO
+		WHERE ACC_NO = #{i}
+		GROUP BY AR.ACC_NO
+	</select>
+	
+	<select id="searchGrade" resultMap="accCode_rm">
+		SELECT ROWNUM, ACC_CODE, ACC_NO, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE, ROOM_CHECKIN, ROOM_CHECKOUT
+		FROM (
+		    SELECT ACC_CODE, A.ACC_NO, A.ROOM_CAPACITY, B.ACC_TYPE, B.ROOM_PRICE, B.ROOM_CHECKIN, B.ROOM_CHECKOUT
+		    FROM (
+		        SELECT ACC_NO, SUM(ROOM_CAPACITY) AS ROOM_CAPACITY, COUNT(*) AS ROOM_COUNT
+		        FROM ACC_GRADE
+		        GROUP BY ACC_NO
+		        HAVING SUM(ROOM_CAPACITY) >= #{totalPerson} AND COUNT(*) >= #{grNum}
+		    ) A
+		    JOIN ACC_GRADE B ON A.ACC_NO = B.ACC_NO
+		    WHERE A.ACC_NO = #{accNo}
+		        AND NOT EXISTS (
+		            SELECT 1
+		            FROM RESERVATION R
+		            JOIN ACC_RESERVATION RA ON R.RESERVATION_NO = RA.RESERVATION_NO
+		            WHERE B.ACC_CODE = RA.ACC_CODE
+		            AND <![CDATA[		
+			                ((R.RESERV_START_DATE <= #{endDate} AND R.RESERV_END_DATE >= #{startDate})
+			                OR (R.RESERV_START_DATE <= #{startDate} AND R.RESERV_END_DATE >= #{endDate})
+			                OR (R.RESERV_START_DATE >= #{startDate} AND R.RESERV_END_DATE <= #{endDate}))
+						]]>
+		            AND R.RESERVATION_DEL_FL = 'N'
+		        )
+		    ORDER BY B.ROOM_PRICE ASC
+		)
+		WHERE ROWNUM = 1
+	</select>
+
+	<select id="highPrice" resultMap="acc_rm">
+		SELECT ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, THUMBNAIL, ACC_CODE, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE
+		FROM (
+		    SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		        I.ACC_IMG_PATH || I.ACC_IMG_RENAME AS THUMBNAIL,
+		        B.ACC_CODE, A.ROOM_CAPACITY, B.ACC_TYPE, B.ROOM_PRICE,
+		        ROW_NUMBER() OVER (PARTITION BY ACC.ACC_NO ORDER BY B.ROOM_PRICE DESC) AS RN
+		    FROM ACC
+		    JOIN ACC_IMAGE I ON ACC.ACC_NO = I.ACC_NO
+		    JOIN (
+		        SELECT ACC_NO, SUM(ROOM_CAPACITY) AS ROOM_CAPACITY, COUNT(*) AS ROOM_COUNT
+		        FROM ACC_GRADE
+		        GROUP BY ACC_NO
+		    ) A ON ACC.ACC_NO = A.ACC_NO
+		    JOIN ACC_GRADE B ON A.ACC_NO = B.ACC_NO
+		    WHERE ACC.ACC_ST_FL = 'Y'
+		    AND ACC.ACC_ADDR LIKE '%${where}%'
+		    AND I.ACC_IMG_LEVEL = 0
+		)
+		WHERE RN = 1
+		ORDER BY ROOM_PRICE DESC
+	</select>
+
+	<select id="searchGradeP" resultMap="accCode_rm">
+        SELECT ROWNUM, ACC_CODE, ACC_NO, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE, ROOM_CHECKIN, ROOM_CHECKOUT
+		FROM (
+		    SELECT ACC_CODE, A.ACC_NO, A.ROOM_CAPACITY, B.ACC_TYPE, B.ROOM_PRICE, B.ROOM_CHECKIN, B.ROOM_CHECKOUT
+		    FROM (
+		        SELECT ACC_NO, SUM(ROOM_CAPACITY) AS ROOM_CAPACITY, COUNT(*) AS ROOM_COUNT
+		        FROM ACC_GRADE
+		        GROUP BY ACC_NO
+		        HAVING SUM(ROOM_CAPACITY) >= #{totalPerson} AND COUNT(*) >= #{grNum}
+		    ) A
+		    JOIN ACC_GRADE B ON A.ACC_NO = B.ACC_NO
+		    WHERE A.ACC_NO = #{accNo}
+		        AND NOT EXISTS (
+		            SELECT 1
+		            FROM RESERVATION R
+		            JOIN ACC_RESERVATION RA ON R.RESERVATION_NO = RA.RESERVATION_NO
+		            WHERE B.ACC_CODE = RA.ACC_CODE
+		            AND <![CDATA[
+			                ((R.RESERV_START_DATE <= #{endDate} AND R.RESERV_END_DATE >= #{startDate})
+			                OR (R.RESERV_START_DATE <= #{startDate} AND R.RESERV_END_DATE >= #{endDate})
+			                OR (R.RESERV_START_DATE >= #{startDate} AND R.RESERV_END_DATE <= #{endDate}))
+						]]>
+						AND R.RESERVATION_DEL_FL = 'N'
+		        )
+		    ORDER BY B.ROOM_PRICE DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
+	
+	
+	<select id="highRate" resultMap="acc_rm">
+		SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		    I.THUMBNAIL,
+		    ROUND(AVG((AR.A_CLEAN_RATE + AR.A_FAC_RATE + AR.A_KIND_RATE) / 3), 1) AS AVG_GRADE
+		FROM ACC
+		JOIN (
+		    SELECT ACC_NO, ACC_IMG_RENAME,
+		        ACC_IMG_PATH || ACC_IMG_RENAME AS THUMBNAIL
+		    FROM ACC_IMAGE
+		    WHERE ACC_IMG_LEVEL = 0
+		) I ON ACC.ACC_NO = I.ACC_NO
+		JOIN ACC_REVIEW R ON ACC.ACC_NO = R.ACC_NO 
+		JOIN ACC_RATE AR ON R.A_REVIEW_NO = AR.A_REVIEW_NO 
+		WHERE ACC.ACC_ST_FL = 'Y'
+		AND ACC.ACC_ADDR LIKE '%${where}%'
+		AND R.A_REVIEW_DEL_FL = 'N' 
+		GROUP BY ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR, I.ACC_IMG_RENAME, I.THUMBNAIL
+		ORDER BY AVG_GRADE DESC
+	</select>
+	
+	<select id="lowRate" resultMap="acc_rm">
+		SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		    I.THUMBNAIL,
+		    ROUND(AVG((AR.A_CLEAN_RATE + AR.A_FAC_RATE + AR.A_KIND_RATE) / 3), 1) AS AVG_GRADE
+		FROM ACC
+		JOIN (
+		    SELECT ACC_NO, ACC_IMG_RENAME,
+		        ACC_IMG_PATH || ACC_IMG_RENAME AS THUMBNAIL
+		    FROM ACC_IMAGE
+		    WHERE ACC_IMG_LEVEL = 0
+		) I ON ACC.ACC_NO = I.ACC_NO
+		JOIN ACC_REVIEW R ON ACC.ACC_NO = R.ACC_NO 
+		JOIN ACC_RATE AR ON R.A_REVIEW_NO = AR.A_REVIEW_NO 
+		WHERE ACC.ACC_ST_FL = 'Y'
+		AND ACC.ACC_ADDR LIKE '%${where}%'
+		AND R.A_REVIEW_DEL_FL = 'N' 
+		GROUP BY ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR, I.ACC_IMG_RENAME, I.THUMBNAIL
+		ORDER BY AVG_GRADE
+	</select>
+		
+
+	<select id="detailCode" resultMap="accCode_rm">
+		SELECT G.ACC_CODE, G.ACC_TYPE, G.ROOM_PRICE, G.ROOM_CAPACITY, G.ROOM_CHECKIN, G.ROOM_CHECKOUT
+		FROM ACC A
+		JOIN ACC_GRADE G ON A.ACC_NO = G.ACC_NO
+		WHERE A.ACC_NO = #{accNo}
+		AND A.ACC_ST_FL = 'Y'
+	</select>
+	
+	<select id="detailImage" resultMap="image_rm">
+		SELECT ACC_IMG_PATH || ACC_IMG_RENAME AS IMAGEPATH
+		FROM ACC A
+		JOIN ACC_IMAGE I ON A.ACC_NO = I.ACC_NO
+		WHERE A.ACC_NO = #{accNo}
+		AND A.ACC_ST_FL = 'Y'
+		ORDER BY ACC_IMG_LEVEL
+	</select>
+	
+	<select id="detailReivew" resultMap="review_rm">
+		SELECT R.A_REVIEW_NO, R.A_REVIEW_CONTENT, R.USER_NO
+		FROM ACC A
+		JOIN ACC_REVIEW R ON A.ACC_NO = R.ACC_NO
+		WHERE A.ACC_NO = #{accNo}
+		AND A.ACC_ST_FL = 'Y'
+		AND R.A_REVIEW_DEL_FL = 'N'
+	</select>
+	
+	<select id="detailRate" resultMap="rate_rm">
+		SELECT ROUND(AVG(T.A_CLEAN_RATE), 1) AS AVG_CLEAN_RATE,
+		       ROUND(AVG(T.A_FAC_RATE), 1) AS AVG_FAC_RATE,
+		       ROUND(AVG(T.A_KIND_RATE), 1) AS AVG_KIND_RATE
+		FROM ACC A
+		JOIN ACC_REVIEW R ON A.ACC_NO = R.ACC_NO
+		JOIN ACC_RATE T ON R.A_REVIEW_NO = T.A_REVIEW_NO
+		WHERE A.ACC_NO = #{accNo}
+		  AND A.ACC_ST_FL = 'Y'
+		  AND R.A_REVIEW_DEL_FL = 'N'
+	</select>
+	
+	<select id="selectAllRate" resultMap="rate_rm">
+		SELECT T.A_REVIEW_NO,
+               T.A_CLEAN_RATE,
+		       T.A_FAC_RATE,
+		       T.A_KIND_RATE
+		FROM ACC A
+		JOIN ACC_REVIEW R ON A.ACC_NO = R.ACC_NO
+		JOIN ACC_RATE T ON R.A_REVIEW_NO = T.A_REVIEW_NO
+		WHERE A.ACC_NO = #{accNo}
+		  AND A.ACC_ST_FL = 'Y'
+		  AND R.A_REVIEW_DEL_FL = 'N'
+	</select>
+	
+	
+
+	<select id="detailCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM ACC A
+		JOIN ACC_REVIEW R ON A.ACC_NO = R.ACC_NO
+		WHERE A.ACC_NO = #{accNo}
+		AND A.ACC_ST_FL = 'Y'
+		AND R.A_REVIEW_DEL_FL = 'N'
+	</select>
+	
+	<select id="baseSearch" resultMap="acc_rm">
+		SELECT ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, THUMBNAIL, ACC_CODE, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE
+		FROM (
+		    SELECT ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, THUMBNAIL, ACC_CODE, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE,
+		           ROW_NUMBER() OVER (PARTITION BY ACC_NO ORDER BY ROOM_PRICE) AS RN
+		    FROM (
+		        SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		               I.ACC_IMG_PATH || I.ACC_IMG_RENAME AS THUMBNAIL,
+		               B.ACC_CODE, A.ROOM_CAPACITY, B.ACC_TYPE, B.ROOM_PRICE
+		        FROM ACC
+		        JOIN ACC_IMAGE I ON ACC.ACC_NO = I.ACC_NO
+		        JOIN (
+		            SELECT ACC_NO, SUM(ROOM_CAPACITY) AS ROOM_CAPACITY
+		            FROM ACC_GRADE
+		            GROUP BY ACC_NO
+		        ) A ON ACC.ACC_NO = A.ACC_NO
+		        JOIN ACC_GRADE B ON A.ACC_NO = B.ACC_NO
+		        WHERE ACC.ACC_ST_FL = 'Y'
+		        AND ACC.ACC_ADDR LIKE '%${where}%'
+		        AND I.ACC_IMG_LEVEL = 0
+		    ) SUBQ
+		)
+		WHERE RN = 1 
+		ORDER BY ROOM_PRICE
+		OFFSET #{start} ROWS FETCH NEXT 5 ROWS ONLY
+	</select>
+	
+
+	<select id="selectListCount" resultType="_int">
+        SELECT COUNT(*)
+		FROM (
+		    SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		        I.ACC_IMG_PATH || I.ACC_IMG_RENAME AS THUMBNAIL,
+		        ROW_NUMBER() OVER (PARTITION BY ACC.ACC_NO ORDER BY ACC.ACC_NAME) AS RN
+		    FROM ACC
+		    JOIN ACC_IMAGE I ON ACC.ACC_NO = I.ACC_NO
+		    WHERE ACC.ACC_ST_FL = 'Y'
+		    AND ACC.ACC_ADDR LIKE '%${where}%'
+		    AND I.ACC_IMG_LEVEL = 0
+		)
+		WHERE RN = 1
+	</select>
+	
+	
+	<select id="selectRateCount" resultType="_int">
+        SELECT COUNT(*)
+		FROM (
+		    SELECT T.RATE_NO, ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		        I.ACC_IMG_PATH || I.ACC_IMG_RENAME AS THUMBNAIL,
+		        ROW_NUMBER() OVER (PARTITION BY ACC.ACC_NO ORDER BY ACC.ACC_NAME) AS RN
+		    FROM ACC
+		    JOIN ACC_IMAGE I ON ACC.ACC_NO = I.ACC_NO
+            JOIN ACC_REVIEW R ON ACC.ACC_NO = R.ACC_NO
+        	JOIN ACC_RATE T ON R.A_REVIEW_NO = T.A_REVIEW_NO
+		    WHERE ACC.ACC_ST_FL = 'Y'
+		    AND ACC.ACC_ADDR LIKE '%${where}%'
+		    AND I.ACC_IMG_LEVEL = 0
+		)
+		WHERE RN = 1
+	</select>
+	
+
+	<select id="moreHighPrice" resultMap="acc_rm">
+		SELECT ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, THUMBNAIL, ACC_CODE, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE
+		FROM (
+		    SELECT ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, THUMBNAIL, ACC_CODE, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE,
+		           ROW_NUMBER() OVER (PARTITION BY ACC_NO ORDER BY ROOM_PRICE) AS RN
+		    FROM (
+		        SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		               I.ACC_IMG_PATH || I.ACC_IMG_RENAME AS THUMBNAIL,
+		               B.ACC_CODE, A.ROOM_CAPACITY, B.ACC_TYPE, B.ROOM_PRICE
+		        FROM ACC
+		        JOIN ACC_IMAGE I ON ACC.ACC_NO = I.ACC_NO
+		        JOIN (
+		            SELECT ACC_NO, SUM(ROOM_CAPACITY) AS ROOM_CAPACITY
+		            FROM ACC_GRADE
+		            GROUP BY ACC_NO
+		        ) A ON ACC.ACC_NO = A.ACC_NO
+		        JOIN ACC_GRADE B ON A.ACC_NO = B.ACC_NO
+		        WHERE ACC.ACC_ST_FL = 'Y'
+		        AND ACC.ACC_ADDR LIKE '%${where}%'
+		        AND I.ACC_IMG_LEVEL = 0
+		    ) SUBQ
+		)
+		WHERE RN = 1 
+		ORDER BY ROOM_PRICE DESC
+		OFFSET #{start} ROWS FETCH NEXT 5 ROWS ONLY
+	</select>
+	
+	
+	<select id="moreHighRate" resultMap="acc_rm">
+		SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		    I.THUMBNAIL,
+		    ROUND(AVG((AR.A_CLEAN_RATE + AR.A_FAC_RATE + AR.A_KIND_RATE) / 3), 1) AS AVG_GRADE
+		FROM ACC
+		JOIN (
+		    SELECT ACC_NO, ACC_IMG_RENAME,
+		        ACC_IMG_PATH || ACC_IMG_RENAME AS THUMBNAIL
+		    FROM ACC_IMAGE
+		    WHERE ACC_IMG_LEVEL = 0
+		) I ON ACC.ACC_NO = I.ACC_NO
+		JOIN ACC_REVIEW R ON ACC.ACC_NO = R.ACC_NO 
+		JOIN ACC_RATE AR ON R.A_REVIEW_NO = AR.A_REVIEW_NO 
+		WHERE ACC.ACC_ST_FL = 'Y'
+		AND ACC.ACC_ADDR LIKE '%${where}%'
+		AND R.A_REVIEW_DEL_FL = 'N' 
+		GROUP BY ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR, I.ACC_IMG_RENAME, I.THUMBNAIL
+		ORDER BY AVG_GRADE DESC
+		OFFSET #{start} ROWS FETCH NEXT 5 ROWS ONLY
+	</select>
+	
+	
+	<select id="moreLowRate" resultMap="acc_rm">
+		SELECT ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		    I.THUMBNAIL,
+		    ROUND(AVG((AR.A_CLEAN_RATE + AR.A_FAC_RATE + AR.A_KIND_RATE) / 3), 1) AS AVG_GRADE
+		FROM ACC
+		JOIN (
+		    SELECT ACC_NO, ACC_IMG_RENAME,
+		        ACC_IMG_PATH || ACC_IMG_RENAME AS THUMBNAIL
+		    FROM ACC_IMAGE
+		    WHERE ACC_IMG_LEVEL = 0
+		) I ON ACC.ACC_NO = I.ACC_NO
+		JOIN ACC_REVIEW R ON ACC.ACC_NO = R.ACC_NO 
+		JOIN ACC_RATE AR ON R.A_REVIEW_NO = AR.A_REVIEW_NO 
+		WHERE ACC.ACC_ST_FL = 'Y'
+		AND ACC.ACC_ADDR LIKE '%${where}%'
+		AND R.A_REVIEW_DEL_FL = 'N' 
+		GROUP BY ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR, I.ACC_IMG_RENAME, I.THUMBNAIL
+		ORDER BY AVG_GRADE
+		OFFSET #{start} ROWS FETCH NEXT 5 ROWS ONLY
+	</select>
+	
+	
+	<insert id="insertWishList">
+		INSERT INTO WISHLIST VALUES(#{accNo}, #{userNo})
+	</insert>
+	
+
+	<delete id="deleteWishList">
+		DELETE FROM WISHLIST
+		WHERE ACC_NO2 = #{accNo}
+		AND USER_NO = #{userNo}
+	</delete>
+	
+	
+   <select id="wishListCheck" resultType="_int">
+      	SELECT COUNT(*) FROM WISHLIST
+		WHERE ACC_NO2 = #{accNo}
+		AND USER_NO = #{userNo}
+   </select>
+   
+   <select id="wishListAccNo" resultType="_int">
+      	SELECT ACC_NO2 FROM WISHLIST
+		WHERE USER_NO = #{userNo}
+   </select>
+   
+   
+   <select id="wishListImageData" resultMap="acc_rm">
+		SELECT ACC_NO, ACC_IMG_PATH || ACC_IMG_RENAME AS THUMBNAIL
+		FROM ACC_IMAGE
+		WHERE ACC_IMG_LEVEL = 0
+        AND ACC_NO = #{accNo}
+   </select>
+   
+   <select id="wishListAccData" resultMap="acc_rm">
+		SELECT ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, BOSS_NO, ACC_CATEGORY, OPEN_DATE
+		FROM ACC
+		WHERE ACC_NO = #{accNo}
+        AND ACC_ST_FL = 'Y'
+   </select>
+   
+   <select id="wishListGrade" resultMap="acc_rm">
+		SELECT ACC_CODE, ACC_TYPE, ROOM_PRICE, ROOM_CAPACITY, ACC_NO
+		FROM (
+		    SELECT ACC_CODE, ACC_TYPE, ROOM_PRICE, ROOM_CAPACITY, ACC_NO
+		    FROM ACC_GRADE
+		    WHERE ACC_NO = #{accNo}
+		    ORDER BY ROOM_PRICE
+		) 
+		WHERE ROWNUM = 1
+   </select>
+   
+   <select id="wishListRate" resultMap="acc_rm">
+		SELECT ACC_NO, COUNT(A_REVIEW_NO) AS REVIEW_COUNT, ROUND(AVG((A_CLEAN_RATE + A_FAC_RATE + A_KIND_RATE) / 3), 1) AS AVG_RATE
+		FROM ACC_RATE
+		JOIN ACC_REVIEW USING(A_REVIEW_NO)
+		WHERE ACC_NO = #{accNo}
+		GROUP BY ACC_NO
+   </select>
+   
+   <select id="reviewCount" resultType="_int">
+		SELECT COUNT(*) FROM ACC_REVIEW
+		WHERE ACC_NO = #{accNo}
+   </select>
+      
+   <select id="reservationData" resultType="_int">
+		SELECT COUNT(*) FROM ACC_REVIEW
+		WHERE ACC_NO = #{accNo}
+   </select>
+      
+   <select id="reserveAllData" resultMap="res_rm">
+	    SELECT ACC_NO, ACC_CODE
+		FROM RESERVATION R
+		JOIN ACC_RESERVATION RA ON R.RESERVATION_NO = RA.RESERVATION_NO
+		WHERE <![CDATA[
+			         ((R.RESERV_START_DATE <= #{endDate} AND R.RESERV_END_DATE >= #{startDate})
+			         OR (R.RESERV_START_DATE <= #{startDate} AND R.RESERV_END_DATE >= #{endDate})
+			         OR (R.RESERV_START_DATE >= #{startDate} AND R.RESERV_END_DATE <= #{endDate}))
+			  ]]>
+		AND R.RESERVATION_DEL_FL = 'N'
+   </select>
+   
+   	<select id="reserveDetail" resultMap="accCode_rm">
+        SELECT ROWNUM, ACC_CODE, ACC_NO, ROOM_CAPACITY, ACC_TYPE, ROOM_PRICE, ROOM_CHECKIN, ROOM_CHECKOUT
+		FROM (
+		    SELECT ACC_CODE, A.ACC_NO, A.ROOM_CAPACITY, B.ACC_TYPE, B.ROOM_PRICE, B.ROOM_CHECKIN, B.ROOM_CHECKOUT
+		    FROM (
+		        SELECT ACC_NO, SUM(ROOM_CAPACITY) AS ROOM_CAPACITY, COUNT(*) AS ROOM_COUNT
+		        FROM ACC_GRADE
+		        GROUP BY ACC_NO
+		        HAVING SUM(ROOM_CAPACITY) >= #{totalPerson} AND COUNT(*) >= #{grNum}
+		    ) A
+		    JOIN ACC_GRADE B ON A.ACC_NO = B.ACC_NO
+		    WHERE A.ACC_NO = #{accNo}
+		        AND NOT EXISTS (
+		            SELECT 1
+		            FROM RESERVATION R
+		            JOIN ACC_RESERVATION RA ON R.RESERVATION_NO = RA.RESERVATION_NO
+		            WHERE B.ACC_CODE = RA.ACC_CODE
+		            AND <![CDATA[
+			                ((R.RESERV_START_DATE <= #{endDate} AND R.RESERV_END_DATE >= #{startDate})
+			                OR (R.RESERV_START_DATE <= #{startDate} AND R.RESERV_END_DATE >= #{endDate})
+			                OR (R.RESERV_START_DATE >= #{startDate} AND R.RESERV_END_DATE <= #{endDate}))
+						]]>
+						AND R.RESERVATION_DEL_FL = 'N'
+		        )
+		    ORDER BY B.ROOM_PRICE DESC
+		)
+	</select>
+   
+
+   <!-- 메인페이지 숙소 조회(등록순) -->
+   <select id="getAccList" resultMap="acc_rm">
+		SELECT *
+		FROM (
+		    SELECT T.RATE_NO, ACC.ACC_NO, ACC.ACC_NAME, ACC.ACC_TEL, ACC.ACC_ADDR,
+		        I.ACC_IMG_PATH || I.ACC_IMG_RENAME AS THUMBNAIL,
+		        ROW_NUMBER() OVER (PARTITION BY ACC.ACC_NO ORDER BY ACC.ACC_NAME) AS RN
+		    FROM ACC
+		    JOIN ACC_IMAGE I ON ACC.ACC_NO = I.ACC_NO
+		    JOIN ACC_REVIEW R ON ACC.ACC_NO = R.ACC_NO
+		    JOIN ACC_RATE T ON R.A_REVIEW_NO = T.A_REVIEW_NO
+		    WHERE ACC.ACC_ST_FL = 'Y'
+		    AND I.ACC_IMG_LEVEL = 0
+		)
+		WHERE RN = 1
+		FETCH FIRST 5 ROWS ONLY
+   </select>
+   
+   
+   <select id="getAccNo" resultType="_int">
+		SELECT ACC_NO FROM ACC
+		WHERE ACC_NAME = #{accName}
+   </select>
+   
+
+   <select id="selectReviewStart" resultMap="res_rm">
+		WITH RESERV_END_DATE AS (
+		    SELECT RESERVATION_NO, TO_DATE(SUBSTR(RESERV_END_DATE,0, 10), 'YYYY-MM-DD') + 1 AS REVIEW_START_DATE, USER_NO
+		    FROM RESERVATION WHERE RESERV_TYPE = 'A'
+		)
+		SELECT RESERVATION_NO, TO_CHAR(REVIEW_START_DATE, 'YYYY-MM-DD') AS REVIEW_START_DATE
+		FROM RESERV_END_DATE
+		WHERE 
+			<![CDATA[
+				REVIEW_START_DATE <= TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+			]]>
+		AND USER_NO = #{userNo}
+   </select>
+
+
+   <select id="userNickName" resultType="string">
+		SELECT USER_NICKNAME FROM "USER"
+		WHERE USER_NO = #{userNo}
+   </select>
+   
+   
+   <delete id="deleteWish">
+		DELETE FROM WISHLIST WHERE ACC_NO2 = #{accNo} AND USER_NO = #{userNo}
+   </delete>
+
+   <select id="roomCapacity" resultType="_int">
+		SELECT ROOM_CAPACITY
+		FROM ACC_GRADE
+		WHERE ACC_CODE = #{accCode}
+   </select>
+   
+</mapper>

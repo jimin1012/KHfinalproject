@@ -1,0 +1,632 @@
+/* 헤더 */
+header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header > .container{
+    max-width: 1920px;
+    height: 70px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+
+
+    
+}
+
+/* 헤더 메인 */
+header > .container >.container1{
+    min-width: 1200px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* justify-content: space-between; */
+
+    /* border: 1px solid black; */
+
+}
+
+
+.logoLogin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 로고 */
+
+.logo{
+    width: 150px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* border: 1px solid black; */
+}
+.logo > a{
+    font-size: 30px;
+    font-weight: bolder;
+    
+    text-decoration: none;
+    
+    color: #004370;
+
+   
+}
+
+header .content1{
+    width: 520px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: right;
+    /* justify-content: right; */
+
+    /* border: 1px solid black; */
+}
+
+
+/* 로그인 전 */
+.login{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.login:hover{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #004370;
+}
+
+.login.login:hover > a{
+    line-height: 30px;
+    font-weight: bold;
+
+    color: white;
+}
+
+.login > a{
+    line-height: 30px;
+    font-weight: bold;
+
+    color: black;
+}
+
+
+
+/* 로그인 */
+/* .fa-regular{
+    font-size: 30px;
+    color: #004370;
+    cursor: pointer;
+}
+
+.fa-regular:hover{
+    color: rgb(112, 0, 0);
+} */
+
+/* 헤더 메뉴 체크 박스 */
+#headerMenuToggle{display: none;}
+
+/* 오른쪽 상단 닉네임 */
+label[for='headerMenuToggle']{cursor: pointer;}
+label[for='headerMenuToggle']:hover{text-decoration: underline;}
+
+/* 체크박스 다음 형제 요소 div */
+#headerMenuToggle + div{display: none;}
+
+/* 체크된 #headerMenuToggle의 다음 형제 요소 div */
+#headerMenuToggle:checked + div{display: flex;}
+
+/* 닉네임 클릭 시 보이는 메뉴 */
+.my-info{
+    width: 150px;
+    height: 200px;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    position: absolute;
+
+    top: 70px;
+    right: 0;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    z-index: 1000;
+
+    background-color: #eaeaec;
+}
+
+.Profile-area{
+    width: 120px;
+    height: 110px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    line-height: 35px;
+
+    border-bottom: 1px solid #aaaaaa;
+}
+
+#userProfile{
+    display: block;
+    width: 70px;
+    height: 70px;
+    border: 3px solid #ddd;
+    border-radius: 50%;
+}
+
+#userProfile > #profileImage{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.myNav-area{
+
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.myNav-area > a{
+
+    color: #575756;
+ 
+}
+
+
+.Profile-area > span{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.myNav-area2{
+
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom: 1px solid #aaaaaa;
+
+}
+.myNav-area2 > a{
+    font-size: 14px;
+
+    color: #464646;
+
+    list-style: none;
+
+}
+
+.myNav-area3{
+
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.myNav-area3 > a{
+    font-size: 12px;
+    
+}
+.myNav-area3 > span{
+    font-size: 12px;
+    color: #868686;
+}
+
+
+/* 검색 영역 */
+header > section{
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.search-area{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* border: 1px solid black; */
+    
+}
+
+.search-area fieldset{
+    width: 220px;
+    height: 30px;
+    border: 1px solid #575756;
+    padding : 2px;
+    border-radius: 50px;
+    display: flex;
+}
+
+/* 검색 창 */
+#query{
+    border : none; /* 테두리 없애기 */
+    border-radius: 50px;
+    /* outline : 
+        포커스가 맞춰진 input의 테두리 */
+    /* outline : none; */
+    outline : 0;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: bold;
+    padding : 10px;
+
+    width: 89%;
+}
+
+#query::placeholder {
+    color: color(#575756 a(0.8));
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* 검색 버튼 */
+#searchBtn{
+    width: 10px;
+    cursor: pointer;
+
+    border : none;
+    justify-content: center;
+
+    margin-right: 18px;
+
+    font-size: 1.2em;
+    color: #575756;
+    background-color: transparent;
+}
+
+/* autoSearch */
+
+/* 검색 결과 */
+.search-area{
+    position: relative;
+    
+}
+
+#autoSearch{
+    width: 100%;
+    padding: 10px 0;
+    position: absolute;
+    z-index: 1100;
+    list-style: none;
+    background: white;
+    border: 1px solid gray;
+    top: 100%;
+    z-index: 999;
+
+    margin-top: 5px;
+    
+}
+
+#autoSearch>li:hover{
+    background-color: #ddd;
+}
+
+#autoSearch>li{
+    width: 100%;
+    height: 35px;
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+}
+
+
+#autoSearch a{
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #464646;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 		
+    word-break:break-all
+  
+}
+
+.close{
+    display: none;
+}
+
+
+/* 네비게이션 */
+
+/* 메뉴 네비게이션 */
+.nav{
+    width: 520px;
+    height: 50px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 10px;
+
+    /* border: 1px solid black; */
+    
+}
+
+/* 왼쪽 */
+.menu1{
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+}
+
+.menu1 > button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#allManu-btn:hover{
+    color: rgb(112, 0, 0);
+
+    cursor: pointer;
+}
+
+.menu1 > button > i{
+    font-size: 30px;
+    color: #004370;
+}
+
+.nav a{
+    font-size: 14px;
+    text-decoration: none;
+    color: #004370;
+}
+
+.nav a:hover{
+    font-size: 14px;
+    font-weight: bold;
+
+    color: rgb(112, 0, 0);
+}
+
+/* 전체 메뉴 아이콘 */
+#allManu-btn{
+    font-size: 30px;
+    color: #004370;
+}
+
+/* 전체 메뉴 범위 */
+.manuToggle{
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+
+    z-index: 2;
+
+}
+
+/* 전체 메뉴 */
+#allMenu{
+    display: none;
+    flex-direction: column;
+
+    min-width: 1300px;
+    padding-top: 30px;
+    padding-left: 50px;
+    border: 1px solid black;
+
+    background-color: #fff;
+}
+
+/* 삭제 버튼 */
+#close-btn{
+    width: 1280px;
+    display: flex;
+    justify-content: right;
+}
+
+#close-btn > button{
+    font-size: 30px;
+    color: #004370;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+}
+
+#close-btn > button:hover{
+    font-size: 30px;
+    color: rgb(112, 0, 0);
+
+}
+
+
+/* 예약 아이콘 범위 지정*/
+.reservationIcon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 400px;
+    height: 70px;
+
+    border-bottom: 1px solid #004370;
+
+}
+
+/* 예약 아이콘 */
+.reservationIcon > label{
+    width: 60px;
+    height: 60px;
+}
+
+.reservationIcon > label > a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    text-decoration: none;
+    color: #004370;
+    font-size: 18px;
+}
+
+
+.reservationIcon a > i{
+    font-size: 40px;
+    color: #004370;
+}
+
+.reservationIcon a > i:hover{
+    font-size: 40px;
+    color: rgb(112, 0, 0);
+}
+
+.reservationIcon a > span{
+    font-size: 12px;
+    color: #004370;
+}
+
+/* 게시판 상세 목록 */
+.noticeList{
+    display: grid;
+
+    align-items: center;
+
+    grid-template-columns: repeat(auto-fit, 230px);
+    grid-gap: 0 34px;
+
+    width: 1300px;
+    height: 200px;
+
+}
+
+.noticeList > div{
+    width: 200px;
+    height: 80px;
+
+    display: flex;
+    flex-direction: column;
+
+    /* border: 1px solid black; */
+}
+
+.noticeList a{
+    text-decoration: none;
+    color: #004370;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.noticeList a:hover{
+    text-decoration: none;
+    color: rgb(112, 0, 0);
+    font-size: 18px;
+    font-weight: bold;
+}
+.noticeList p{
+    color: #004370;
+    border-bottom: 1px solid #004370;
+}
+
+/* 하단 문구 */
+.ment {
+    width: 1280px;
+
+    display: flex;
+    justify-content: right;
+
+    padding-bottom: 10px;
+}
+
+.ment > span{
+    font-size: 14px;
+    font-weight: bold;
+    color: #696969;
+}
+
+/* 팝업창 */
+/* #layer_popup{
+    width: 300px;
+    height: 400px;
+
+    display: flex;
+
+    background-image: url(/resources/images/main/팝업창.png);
+    background-size: cover;
+
+    z-index: 1000;
+
+    margin-top: 200px;
+    margin-left: 700px;
+}
+
+#check{
+    height: 30px;
+
+
+    color: white;
+    font-weight: bold;
+}
+#close{
+
+    margin-top: 380px;
+    margin-left: 30px;
+}
+
+#close > a{
+    text-decoration: none;
+    color: white;
+} */

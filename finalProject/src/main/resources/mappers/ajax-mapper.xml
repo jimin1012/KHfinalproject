@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ajaxMapper">
+
+	<resultMap type="User" id="user_rm">
+
+		<!-- DB의 기본 키(복합키면 여러 개 작성) -->
+		<id property="userNo" column="USER_NO" />
+
+		<!-- DB의 일반 컬럼들 -->
+		<result property="userName" column="USER_NAME" />
+		<result property="userBirthDate" column="USER_BIRTH" />
+		<result property="userGender" column="USER_GENDER" />
+		<result property="userBirthDate" column="USER_BIRTH" />
+		<result property="userAddress" column="USER_ADDR" />
+		
+		<result property="userId" column="USER_ID" />
+		<result property="userPw" column="USER_PW" />
+		<result property="userNickname" column="USER_NICKNAME" />
+		<result property="userEmail" column="USER_EMAIL" />
+		
+		<result property="userTel" column="USER_TEL" />
+
+		<result property="profileImage" column="PROFILE_IMG" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="userDeleteFlag" column="USER_DEL_FL" />
+		<result property="authority" column="AUTHORITY" />
+	</resultMap>
+	
+	 <!-- 아이디 중복 확인 -->
+   <select id="checkId" resultType="_int" >
+      SELECT COUNT(*)
+      FROM "USER"
+      WHERE USER_ID = #{id}
+      AND USER_DEL_FL = 'N'
+   </select>
+   
+	 <!-- 이메일 중복 확인 -->
+   <select id="checkEmail" resultType="_int" >
+      SELECT COUNT(*)
+      FROM "USER"
+      WHERE USER_EMAIL = #{email}
+      AND USER_DEL_FL = 'N'
+   </select>
+   
+   <!-- 닉네임 중복 검사 -->
+  <!--  <select id="checkNickname" resultType="_int">
+	   	SELECT COUNT(*)
+	   	FROM MEMBER
+	   	WHERE MEMBER_NICKNAME = #{nickname}
+	   	AND MEMBER_DEL_FL = 'N'
+   </select> -->
+   
+ 
+</mapper>

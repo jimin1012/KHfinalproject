@@ -1,0 +1,88 @@
+*{box-sizing: border-box;}
+body{margin: 0 auto;}
+
+/* 제일 큰 감싸는 영역 */
+.wrap{
+    /* 최소값만 정한이유는 안에 요소크기에 맞게 크기가 더 늘어날 수 있게 하려고 */
+    min-width: 1200px; /* min-width : 최소 width */
+    min-height: 100vh; 
+    display: flex;
+    /* flex-direction: row; */
+    text-align: center;
+     /* background-color: black; */
+     /* color: white; */
+}
+
+
+/* header 시작 */
+header{
+    position: sticky;
+    top: 0;
+    min-width: 200px;
+    max-width: 200px;
+    width: 10%;
+    min-height: 600px;
+    height: 100vh;
+    background-color: rgb(112, 144, 152);
+    display: flex;
+    flex-direction: column;
+    /* border-radius: 15px; */
+    align-items: center;
+}
+
+.header-top-wrap{
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid gray;
+}
+.header-top-wrap >div:nth-child(1){
+  text-align: left;
+  font-size: 12px;
+  color: rgb(85, 88, 88);
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.header-top-wrap >div:nth-child(2) >a{
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.listTitle{
+  text-decoration: none;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.listCon{
+  margin-left: 10px;
+}
+
+.listCon > li{
+  text-align: left;
+}
+
+.listCon > li::marker{
+  color: white;
+}
+
+.listCon > li:hover{
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+
+.listCon > li>a{
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+}
+.fa-solid {
+  font-size: 24px;
+}

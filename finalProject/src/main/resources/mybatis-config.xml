@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<!-- SqlSessionTemplate 생성 시 적용될 설정 작성 부분 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.nxshxw.project.user.model.dto.User" alias="User" />
+		<typeAlias type="com.nxshxw.project.board.model.dto.Board" alias="Board" />
+		<typeAlias type="com.nxshxw.project.ownerPage.model.dto.Owner" alias="Owner" />
+		<typeAlias type="com.nxshxw.project.ownerPage.model.dto.ACCGradeOwner" alias="ACCGradeOwner" />
+		<typeAlias type="com.nxshxw.project.ownerPage.model.dto.ACCImageOwner" alias="ACCImageOwner" />
+		<typeAlias type="com.nxshxw.project.ownerPage.model.dto.ACCResnOwner" alias="ACCResnOwner" />
+		<typeAlias type="com.nxshxw.project.ownerPage.model.dto.ACCOwnerStats" alias="ACCOwnerStats" />
+		<typeAlias type="com.nxshxw.project.restaurant.model.dto.TastyRest" alias="TastyRest" />
+		<typeAlias type="com.nxshxw.project.board.model.dto.Festival" alias="Festival" />
+		<typeAlias type="com.nxshxw.project.board.model.dto.Poll" alias="Poll" />
+		<typeAlias type="com.nxshxw.project.board.model.dto.Option" alias="Option" />
+		<typeAlias type="com.nxshxw.project.board.model.dto.Comment" alias="Comment" />
+		<typeAlias type="com.nxshxw.project.reservation.model.dto.Reservation" alias="Reservation" />
+		<typeAlias type="com.nxshxw.project.chat.model.dto.ChatRoom" alias="ChatRoom" />
+		<typeAlias type="com.nxshxw.project.chat.model.dto.Chatting" alias="Chatting" />
+		<typeAlias type="com.nxshxw.project.report.model.dto.Report" alias="Report" />
+		<typeAlias type="com.nxshxw.project.acc.model.dto.acc" alias="Acc" />
+		<typeAlias type="com.nxshxw.project.acc.model.dto.accCode" alias="AccCode" />
+		<typeAlias type="com.nxshxw.project.acc.model.dto.accReview" alias="Review" />
+		<typeAlias type="com.nxshxw.project.acc.model.dto.accImage" alias="Image" />
+		<typeAlias type="com.nxshxw.project.acc.model.dto.accRate" alias="Rate" />
+		<typeAlias type="com.nxshxw.project.acc.model.dto.accReserve" alias="AccReserve" />
+		<typeAlias type="com.nxshxw.project.message.model.dto.Message" alias="Message" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="/mappers/user-mapper.xml" />
+		<mapper resource="/mappers/ajax-mapper.xml" />
+		<mapper resource="/mappers/board-mapper.xml" />
+		<mapper resource="/mappers/comment-mapper.xml" />
+		<mapper resource="/mappers/ownerPage-mapper.xml" />
+		<mapper resource="/mappers/tastyRest-mapper.xml" />
+
+		<mapper resource="/mappers/myPage-mapper.xml" />
+
+		<mapper resource="/mappers/admin-mapper.xml" />
+		<mapper resource="/mappers/reservation-mapper.xml" />
+		<mapper resource="/mappers/chat-mapper.xml" />
+		<mapper resource="/mappers/report-mapper.xml" />
+		<mapper resource="/mappers/data-mapper.xml" />
+		<mapper resource="/mappers/acc-mapper.xml" />
+		<mapper resource="/mappers/message-mapper.xml" />
+		<mapper resource="/mappers/review-mapper.xml" />
+
+	</mappers>
+
+
+</configuration>

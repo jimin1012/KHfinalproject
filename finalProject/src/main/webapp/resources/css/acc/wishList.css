@@ -1,0 +1,132 @@
+.wishCon1{
+    width: 880px;
+	height: 130px;
+	
+	border: 1px solid rgb(224, 224, 224);
+	border-radius: 10px;
+}
+
+.wishCla1, .wishCla2{
+	margin-left: 15px;
+}
+
+.wishCla1{
+	height: 80px;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+
+	font-size: 25px;
+}
+
+.wishCla2{
+	height: 50px;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.wishOne{
+	border: 0;
+	background-color: white;
+	font-size: 20px;
+}
+
+.wishCon2{
+    width: 1000px;
+	height: 750px;
+	display: flex;
+}
+
+.wishCla3{
+	width: 200px;
+	height: 630px;
+
+	border: 1px solid rgb(224, 224, 224);
+	margin-top : 20px;
+	margin-right: 30px;
+	position: relative;
+	text-align: center;
+}
+
+.wishCla4, .wishCla5{
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wishCla6{
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wishCla7{
+	height: 200px;
+}
+
+.wishCla8, .wishCla9{
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wishCla8{
+	font-size: 23px;
+	font-weight: bold;
+}
+
+.wishDi1{
+	width: 40px;
+	height: 40px;
+	background-color: rgb(0, 67, 112);
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 15px;
+	font-weight: bold;
+}
+
+.wishDi2{
+	font-size: 18px;
+}
+
+#wishCap{
+	width: 200px;
+	height: 170px;
+}
+
+.wishDel{
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	border: 0;
+}
+
+.wishNm{
+	font-size: 25px;
+	color: rgb(0, 67, 112);
+	font-weight: bold;
+}
+
+.wishAddr{
+	font-size: 19px;
+}
+
+.wishSubm{
+	width: 140px;
+	height: 50px;
+	border-radius: 5px;
+	border: 0;
+	background-color: rgb(0, 67, 112);
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.wishOne{
+	color: red;
+}

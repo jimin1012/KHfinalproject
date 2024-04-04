@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reservationMapper">
+
+	<resultMap type="Reservation" id="reservation_rm">
+		<!-- DB의 기본 키(복합키면 여러 개 작성) -->
+		<id property="reservationNo" column="RESERVATION_NO" />
+
+		<!-- DB의 일반 컬럼들 -->
+		<result property="reservationName" column="RESERVATION_NAME" />
+		<result property="reservationDelFl" column="RESERVATION_DEL_FL" />
+		<result property="reservationStartDate" column="RESERV_START_DATE" />
+		<result property="reservationEndDate" column="RESERV_END_DATE" />
+		<result property="price" column="PRICE" />
+		<result property="reservType" column="RESERV_TYPE" />
+		<result property="reservUID" column="RESERV_UID" />
+		
+		
+		<result property="payTime" column="PAY_TIME" />
+		<result property="userNo" column="USER_NO" />
+		<result property="depPlace" column="DEP_PLACE" />
+		<result property="arrPlace" column="ARR_PLACE" />
+		
+		<result property="seatNo" column="SEAT_NO" />
+
+		<result property="transpCode" column="TRANSP_CODE" />
+		<result property="grade" column="GRADE" />
+		<result property="trainCarNo" column="TRAIN_CAR_NO" />
+		
+		<result property="resPeople" column="RES_PEOPLE" />
+		<result property="accCode" column="ACC_CODE" />
+		<result property="accNo" column="ACC_NO" />
+		<result property="userName" column="USER_NAME" />
+		<result property="userTel" column="USER_TEL" />
+		
+		
+		
+	</resultMap>
+	
+	<!-- 예약 -->
+	<insert id="reservation" parameterType="Reservation" useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="reservationNo">
+			SELECT SEQ_RES_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO "RESERVATION" 
+		VALUES(#{reservationNo},#{reservationName},DEFAULT,#{reservationStartDate},#{reservationEndDate},#{price},#{reservType},SYSDATE,#{reservUID},#{userNo})
+	</insert> 
+	
+	
+	
+	<!-- 예약 성공하면 교통테이블에 마저 값 넣음 -->
+	<insert id="transportaion">
+		INSERT INTO "TRANSPORTATION" 
+		VALUES(#{reservationNo},#{depPlace},#{arrPlace},#{seatNo},1,#{grade},#{trainCarNo})
+	</insert>
+	
+	<insert id="accomodation">
+		INSERT INTO "ACC_RESERVATION" VALUES(#{reservationNo},#{accNo},#{resPeople},#{accCode})
+	</insert> 
+	
+	
+	<select id="selectReservationDetail" resultMap="reservation_rm">
+		SELECT USER_NAME,USER_TEL,RESERVATION_NO,RESERVATION_NAME,RESERV_START_DATE,RESERV_END_DATE,PRICE,PAY_TIME,RESERV_TYPE,RESERV_UID
+		FROM "RESERVATION"
+		JOIN "USER" USING(USER_NO)
+		WHERE USER_NO = #{userNo}
+		AND RESERVATION_NO = #{reservationNo}
+	</select>
+	
+	
+	
+	<!-- 관리자 - 예약 목록 조회 -->
+	<select id="selectReservationList" resultMap="reservation_rm">
+		SELECT RESERVATION_NO, RESERVATION_NAME, RESERV_START_DATE, RESERV_END_DATE, 
+		        PRICE, RESERV_TYPE, PAY_TIME, RESERV_UID, 
+		        USER_NO, USER_NAME, RESERVATION_DEL_FL
+		FROM "RESERVATION"
+		JOIN "USER" USING(USER_NO)
+		ORDER BY RESERVATION_NO DESC
+	</select>
+	
+	<!-- 관리자 - 예약 목록 검색 -->
+	<select id="searchReservationList" resultMap="reservation_rm">
+		SELECT RESERVATION_NO, RESERVATION_NAME, RESERV_START_DATE, RESERV_END_DATE, 
+			PRICE, RESERV_TYPE, PAY_TIME, RESERV_UID, 
+			USER_NO, USER_NAME, RESERVATION_DEL_FL
+		FROM "RESERVATION"
+		JOIN "USER" USING(USER_NO)
+		<if test='key == "T"'>
+			WHERE RESERV_TYPE = 'T'
+		</if>
+		<if test='key == "A"'>
+			WHERE RESERV_TYPE = 'A'
+		</if>
+		<if test='key == "B"'>
+			WHERE RESERV_TYPE = 'B'
+		</if>
+		<if test='query != ""'>
+			AND USER_NAME LIKE '%${query}%'		
+		</if>
+		<if test='startDate != "" or endDate != ""'>
+			AND RESERVATION_NO IN(SELECT RESERVATION_NO
+			    FROM(SELECT RESERVATION_NO,
+			         TO_DATE((SUBSTR(RESERV_START_DATE,1,4 ) || '-' || SUBSTR(RESERV_START_DATE,6,2 ) || '-' || SUBSTR(RESERV_START_DATE,9,2)), 'YYYY MM DD') START_DATE,
+			         TO_DATE((SUBSTR(RESERV_END_DATE,1,4 ) || '-' || SUBSTR(RESERV_END_DATE,6,2 ) || '-' || SUBSTR(RESERV_END_DATE,9,2)), 'YYYY MM DD') END_DATE
+			         FROM RESERVATION)
+			    <if test='startDate != "" and endDate == ""'>
+				   <![CDATA[
+				     WHERE START_DATE >= #{startDate})
+				   ]]>	
+			    </if>
+			    <if test='startDate == "" and endDate != ""'>
+				   <![CDATA[
+				     WHERE END_DATE <= #{endDate})
+				   ]]>	
+			    </if>
+			    <if test='startDate != "" and endDate != ""'>
+				   <![CDATA[
+				     WHERE START_DATE >= #{startDate}
+				     AND END_DATE <= #{endDate})
+				   ]]>	
+			    </if>
+		</if>
+		ORDER BY RESERVATION_NO DESC
+	</select>
+	
+	
+	<!-- 에약 상태별 조회 -->
+	<select id="searchFlagReservationList" resultMap="reservation_rm">
+		SELECT RESERVATION_NO, RESERVATION_NAME, RESERV_START_DATE, RESERV_END_DATE, 
+			PRICE, RESERV_TYPE, PAY_TIME, RESERV_UID, 
+			USER_NO, USER_NAME, RESERVATION_DEL_FL
+		FROM "RESERVATION"
+		JOIN "USER" USING(USER_NO)
+		WHERE RESERVATION_DEL_FL = #{delFlag}
+		<if test='key != null'>
+			<if test='key == "T"'>
+				AND RESERV_TYPE = 'T'
+			</if>
+			<if test='key == "A"'>
+				AND RESERV_TYPE = 'A'
+			</if>
+			<if test='key == "B"'>
+				AND RESERV_TYPE = 'B'
+			</if>
+			<if test='query != ""'>
+				AND USER_NAME LIKE '%${query}%'		
+			</if>
+			<if test='startDate != "" or endDate != ""'>
+				AND RESERVATION_NO IN(SELECT RESERVATION_NO
+				    FROM(SELECT RESERVATION_NO,
+				         TO_DATE((SUBSTR(RESERV_START_DATE,1,4 ) || '-' || SUBSTR(RESERV_START_DATE,6,2 ) || '-' || SUBSTR(RESERV_START_DATE,9,2)), 'YYYY MM DD') START_DATE,
+				         TO_DATE((SUBSTR(RESERV_END_DATE,1,4 ) || '-' || SUBSTR(RESERV_END_DATE,6,2 ) || '-' || SUBSTR(RESERV_END_DATE,9,2)), 'YYYY MM DD') END_DATE
+				         FROM RESERVATION)
+				    <if test='startDate != "" and endDate == ""'>
+					   <![CDATA[
+					     WHERE START_DATE >= #{startDate})
+					   ]]>	
+				    </if>
+				    <if test='startDate == "" and endDate != ""'>
+					   <![CDATA[
+					     WHERE END_DATE <= #{endDate})
+					   ]]>	
+				    </if>
+				    <if test='startDate != "" and endDate != ""'>
+					   <![CDATA[
+					     WHERE START_DATE >= #{startDate}
+					     AND END_DATE <= #{endDate})
+					   ]]>	
+				    </if>
+			</if>
+		</if>
+		ORDER BY RESERVATION_NO DESC
+	</select>
+	
+	
+	
+	<update id="reservationCancle">
+		UPDATE "RESERVATION" SET RESERVATION_DEL_FL = 'Y' WHERE RESERVATION_NO = #{reservationNo}
+	</update>
+	
+	<select id="selectSeats" resultType="String">
+		
+		SELECT SEAT_NO FROM TRANSPORTATION
+		JOIN RESERVATION USING(RESERVATION_NO)
+		WHERE DEP_PLACE = #{depName}
+		AND ARR_PLACE = #{arrName}
+		AND RESERV_START_DATE = #{depTime}
+		AND GRADE = #{trainGrade}
+		AND TRAIN_CAR_NO = #{cardNo}
+	</select>
+	
+	
+</mapper>

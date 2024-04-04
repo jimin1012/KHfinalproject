@@ -1,0 +1,274 @@
+/* 경기천년 */
+@charset "UTF-8";
+
+@font-face {
+    font-family: NanumSquareL;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareR;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareEB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 폰트: 경기천년체 제목 바탕 */
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+main {
+    background-color: rgba(0, 67, 112, 0.041);
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    /*  */
+}
+
+/* 사이드메뉴 + 본내용 */
+.page-container {
+    top: 0;
+
+    display: flex;
+    position: relative;
+    margin: 0, 355px, 0, 355px;
+}
+
+.page-container::before {
+    content: "";
+    display: block;
+    position: absolute;
+    /* .page-container 대비 절대 위치를 지정합니다. */
+    top: 0;
+    left: -29%;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background-color: white;
+    /* 배경색을 하얗게 설정합니다. */
+    z-index: 1;
+    /* .page-container의 내용 뒤에 배치합니다. */
+}
+
+.content-container {
+    background-color: white;
+    margin: 25px;
+
+    min-width: 800px;
+
+    padding: 16px 17px 0;
+    border-radius: 15px;
+    box-shadow: 2px 2px 14px 0 rgba(0, 67, 112, 0.726);
+    border: rgba(0, 67, 112, 0.726);
+    background-color: #fff;
+    box-sizing: border-box;
+    text-align: center;
+}
+.reservation-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation {
+    margin-top: 35px;
+
+    font-family: 'GyeonggiBatang';
+    font-weight: bold;
+    font-size: 25px;
+    height: 40px;
+    text-align: center;
+    padding-top: 50px;
+
+    width: 100%;
+
+
+}
+
+
+.reservation>hr {
+    border: 0;
+    /* 기존 테두리를 제거합니다. */
+    height: 3px;
+    /* 선의 두께를 정합니다. */
+    background-color: rgba(0, 67, 112, 0.041);
+    /* 선의 색상을 정합니다. */
+}
+
+.orderBy-menu {
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.orderBy-menu> div {
+    font-family: NanumSquareR;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+/* 버티칼 바 css */
+#vertical{
+    color: rgba(0, 67, 112, 0.041);
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+/* today list 선택 */
+#todayList{
+    
+}
+
+/* 정렬 선택  */
+#select-orderBy{
+    /* font-family: NanumSquareB;
+    font-weight: bold;
+    color: rgba(0, 67, 112);
+
+    border-bottom: 2px solid rgba(0, 67, 112, 0.363); */
+}
+
+.currentList {
+    font-family: NanumSquareB;
+    font-weight: bold;
+    color: rgba(0, 67, 112);
+
+    border-bottom: 2px solid rgba(0, 67, 112, 0.363);
+}
+
+
+
+
+
+.reservation-list{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.reservation-list>table{
+    width: 90%;
+    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 20px; /* 수평 간격과 수직 간격 */
+
+    
+}
+/* 페이지네이션 */
+.pagination-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+}
+.pagination-area ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-area a{
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    padding: 5px 10px;
+}
+.current{
+    color: white;
+    font-weight: bold;
+    background-color: rgba(58, 156, 221, 0.329);
+    border-radius: 5px;
+    color: rgb(0, 67, 112);
+}
+
+/* thead와 tbody 사이 간격 위한 css */
+tbody tr:first-child {
+    margin-top: 210px; /* 원하는 간격에 맞춰 조정 */
+}
+
+tbody > tr{
+    padding: 16px 17px 0;
+    border-radius: 15px;
+    box-shadow: 2px 2px 12px 0 rgba(58, 156, 221, 0.329);
+    border: rgba(58, 156, 221, 0.315);
+    background-color: #fff;
+    box-sizing: border-box;
+    text-align: center;
+}
+tbody > tr>td {
+    padding-top: 10px; /* 위쪽 패딩 조정 */
+    padding-bottom: 10px; /* 아래쪽 패딩 조정 */
+}
+
+
+/* ------- */
+/* 모든 <td>와 <th>에 기본적인 스타일 적용 */
+tbody > tr > td {
+    /* background-color: rgba(0, 67, 112, 0.041); */
+    /* border: 2px solid rgba(0, 67, 112, 0.041); */
+}
+
+/* 테이블의 각 모서리에 있는 셀에 대해 둥근 모서리 적용 */
+th{
+    font-family : NanumSquareR;
+}
+td{
+    border-radius: 2px;
+    font-family : NanumSquareR;
+    line-height: 1.3;
+}
+
+td:first-child {
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+}
+td:last-child {
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+}
+/*  */

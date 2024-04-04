@@ -1,0 +1,95 @@
+
+body{
+    margin: 0;
+}
+main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mainWrap{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed gainsboro;
+}
+
+#receiptHeader{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px dashed gainsboro;
+    color: #004370;
+}
+
+#receiptHeader>div:first-child{
+    font-size: 26px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#userInfo{
+    margin-top: 20px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px dashed gainsboro;
+}
+
+#productInfo{
+    margin-top: 20px;
+    width: 100%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px dashed gainsboro;
+    align-items: center;
+}
+
+.infoTitle{
+    width: 90%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.infoCon{
+    font-size: 14px;
+    margin-top: 15px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#btnWrap{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#myPageBtn{
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+#cancleBtn{
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+}

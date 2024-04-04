@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chatMapper">
+
+	<!-- 채팅룸 -->
+	<resultMap type="ChatRoom" id="chatroom_rm">
+		<id property="chatRoomNo" column="CHATROOM_NO"/>
+		<result property="chatRoomStateFL" column="CHATROOM_ST_FL"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="managerNo" column="MANAGER_NO"/>
+		
+		<result property="userNickname" column="USER_NICKNAME"/>
+		<result property="userProfile" column="PROFILE_IMG"/>
+		<result property="notReadCount" column="NOT_READ_COUNT"/>
+		
+		<result property="lastMessage" column="LAST_CHAT"/>
+		<result property="sendTime" column="SEND_TIME"/>
+	</resultMap>
+
+	<!-- 채팅 내용 -->
+	<resultMap type="Chatting" id="chat_rm">
+		<id property="chatNo" column="CHAT_NO"/>
+		<result property="chatContent" column="CHAT_CONTENT"/>
+		<result property="sendDate" column="SEND_DATE"/>
+		<result property="sendTime" column="SEND_TIME"/>
+		<result property="senderNo" column="SENDER_NO"/>
+		<result property="chatRoomNo" column="CHATROOM_NO"/>
+		<result property="readFlag" column="READ_ST_FL"/>
+		
+		<result property="targetNo" column="TARGET_NO"/>
+		<result property="authority" column="AUTHORITY"/>
+		
+	
+	</resultMap>
+
+	<!-- 회원정보 -->
+	<resultMap type="User" id="user_rm">
+		<id property="userNo" column="USER_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="userNickname" column="USER_NICKNAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="userDeleteFlag" column="USER_DEL_FL"/>
+		<result property="authority" column="AUTHORITY"/>
+	</resultMap>
+
+	
+	
+	
+	<!-- 관리자 번호 조회 -->
+	<select id="selectManagerNo" resultType="_int">
+		SELECT USER_NO
+		FROM "USER"
+		WHERE AUTHORITY = 3
+		AND ROWNUM = 1
+	</select>
+	
+	<!-- 채팅방 조회 -->
+	<select id="selectChatRoom" resultType="_int">
+		SELECT NVL(SUM(CHATROOM_NO), 0) FROM CHATROOM WHERE USER_NO = #{userNo}
+	</select>
+	
+	<!-- 채팅방 생성 -->
+	<insert id="createChatRoom">
+		INSERT INTO CHATROOM
+		VALUES(SEQ_CHATROOM_NO.NEXTVAL, 'N', #{userNo}, #{targetNo})
+	</insert>
+	
+	<!-- 채팅 내역 조회 -->
+	<select id="selectChatList" resultMap="chat_rm">
+		SELECT CHAT_NO, CHAT_CONTENT, READ_ST_FL, SENDER_NO, CHATROOM_NO,
+		    TO_CHAR(SEND_TIME, 'YYYY-MM-DD') SEND_DATE,
+		    TO_CHAR(SEND_TIME, 'HH24:MI') SEND_TIME
+		FROM CHATTING
+		WHERE CHATROOM_NO = #{chatRoomNo}
+		ORDER BY CHAT_NO
+	</select>
+	
+	<!-- 채팅 내용 삽입 -->
+	<insert id="insertChat">
+		INSERT INTO "CHATTING"
+		VALUES(SEQ_CHAT_NO.NEXTVAL, #{chatContent}, DEFAULT, #{senderNo}, #{chatRoomNo}, DEFAULT )
+	</insert>
+	
+	<!-- 채팅 읽음 처리 -->
+	<update id="updateReadFlag">
+		UPDATE  "CHATTING" SET READ_ST_FL = 'Y'
+		WHERE CHATROOM_NO = #{chatRoomNo}
+		AND SENDER_NO != #{userNo}
+	</update>
+	
+	<!-- 채팅방 상태 조회 -->
+	<select id="selectChatRoomStateFl" resultType="string">
+		SELECT CHATROOM_ST_FL FROM CHATROOM WHERE CHATROOM_NO = #{chatRoomNo}
+	</select>
+	
+	
+	
+	<!-- 채팅방 개수 조회 (일반+중요) -->
+	<select id="getRoomCount" resultType="_int">
+		SELECT COUNT(*) FROM CHATROOM
+		WHERE CHATROOM_ST_FL != 'B'
+	</select>
+	
+	<!-- 채팅방 목록 조회(전체) -->
+	<select id="selectChatRoomListAll" resultMap="chatroom_rm">
+		SELECT CHATROOM_NO,
+		    (SELECT CHAT_CONTENT FROM (
+		        SELECT * FROM CHATTING C1
+		        WHERE C1.CHATROOM_NO = R.CHATROOM_NO
+		        ORDER BY CHAT_NO DESC)
+		    WHERE ROWNUM = 1) LAST_CHAT,
+		    TO_CHAR((SELECT MAX(SEND_TIME)
+		        FROM CHATTING C2
+		        WHERE C2.CHATROOM_NO = R.CHATROOM_NO) , 'YYYY-MM-DD HH24:MI') SEND_TIME,
+		    USER_NO,
+		    (SELECT USER_NICKNAME FROM "USER" U 
+		        WHERE U.USER_NO = R.USER_NO) USER_NICKNAME,
+		    (SELECT PROFILE_IMG FROM "USER" U 
+		        WHERE U.USER_NO = R.USER_NO) PROFILE_IMG,
+		    (SELECT COUNT(*) FROM CHATTING C3
+		        WHERE C3.CHATROOM_NO = R.CHATROOM_NO AND READ_ST_FL = 'N' AND SENDER_NO != 1) NOT_READ_COUNT,
+		    (SELECT MAX(CHAT_NO) MAX_CHAT_NO FROM CHATTING C4 
+		        WHERE R.CHATROOM_NO = C4.CHATROOM_NO) MAX_CHAT_NO,
+		    CHATROOM_ST_FL
+		FROM CHATROOM R
+		WHERE CHATROOM_ST_FL != 'B'
+		ORDER BY MAX_CHAT_NO DESC NULLS LAST
+	</select>
+	
+	
+	<!-- 채팅방 개수 조회 (중요 목록 조회 + 검색(전체,중요)) -->
+	<select id="getRoomCountSearch" resultType="_int">
+		SELECT COUNT(*) 
+		FROM CHATROOM
+		JOIN "USER" USING(USER_NO)
+		<if test='stateFl=="vip"'>
+			WHERE CHATROOM_ST_FL = 'S'
+		</if>
+		<if test='stateFl=="block"'>
+			WHERE CHATROOM_ST_FL = 'B'
+		</if>
+		<if test='authority != null'>
+			<choose>
+				<when test='stateFl == "" or stateFl == null'>
+					WHERE USER_NICKNAME LIKE '%${userNickname}%'
+					AND AUTHORITY = #{authority}
+				</when>
+				<otherwise>
+			 		AND USER_NICKNAME LIKE '%${userNickname}%'
+					AND AUTHORITY = #{authority}
+				</otherwise>
+			</choose>
+			AND CHATROOM_ST_FL != 'B'
+		</if>
+			
+	</select>
+	
+	
+	<!-- 현재 페이지 채팅방 중요 목록 조회 + 검색(전체,중요) -->
+	<select id="selectChatRoomListSearch" resultMap="chatroom_rm">
+		SELECT CHATROOM_NO,
+		    (SELECT CHAT_CONTENT FROM (
+		        SELECT * FROM CHATTING C1
+		        WHERE C1.CHATROOM_NO = R.CHATROOM_NO
+		        ORDER BY CHAT_NO DESC)
+		    WHERE ROWNUM = 1) LAST_CHAT,
+		    TO_CHAR((SELECT MAX(SEND_TIME)
+		        FROM CHATTING C2
+		        WHERE C2.CHATROOM_NO = R.CHATROOM_NO) , 'YYYY-MM-DD HH24:MI') SEND_TIME,
+		    R.USER_NO,
+		    (SELECT USER_NICKNAME FROM "USER" U 
+		        WHERE U.USER_NO = R.USER_NO) USER_NICKNAME,
+		    (SELECT PROFILE_IMG FROM "USER" U 
+		        WHERE U.USER_NO = R.USER_NO) PROFILE_IMG,
+		    (SELECT COUNT(*) FROM CHATTING C3
+		        WHERE C3.CHATROOM_NO = R.CHATROOM_NO AND READ_ST_FL = 'N' AND SENDER_NO != 1) NOT_READ_COUNT,
+		    (SELECT MAX(CHAT_NO) MAX_CHAT_NO FROM CHATTING C4 
+		        WHERE R.CHATROOM_NO = C4.CHATROOM_NO) MAX_CHAT_NO,
+		    CHATROOM_ST_FL
+		FROM CHATROOM R
+		JOIN "USER" U ON(U.USER_NO = R.USER_NO)
+		<if test='stateFl=="vip"'>
+			WHERE CHATROOM_ST_FL = 'S'
+		</if>
+		<if test='stateFl=="block"'>
+			WHERE CHATROOM_ST_FL = 'B'
+		</if>
+		<if test='authority != null'>
+			<choose>
+				<when test='stateFl == "" or stateFl == null'>
+					WHERE USER_NICKNAME LIKE '%${userNickname}%'
+					AND AUTHORITY = #{authority}
+				</when>
+				<otherwise>
+			 		AND USER_NICKNAME LIKE '%${userNickname}%'
+					AND AUTHORITY = #{authority}
+				</otherwise>
+			</choose>
+			<choose>
+				<when test='stateFl=="block"'>
+					AND CHATROOM_ST_FL = 'B'
+				</when>
+				<otherwise>
+			 		AND CHATROOM_ST_FL != 'B'
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY MAX_CHAT_NO DESC NULLS LAST
+	</select>
+	
+	
+	<!-- 관리자 - 중요 채팅방 변경 -->
+	<update id="updateStarCheck">
+		UPDATE CHATROOM
+		<if test='check == "0"'>
+			SET CHATROOM_ST_FL = 'S'
+		</if>	
+		<if test='check == "1"'>
+			SET CHATROOM_ST_FL = 'N'
+		</if>	
+		WHERE CHATROOM_NO = #{chatRoomNo}
+	</update>
+	
+	
+	<!-- 관리자 - 채팅방 차단 처리 -->
+	<update id="updatechatBlock">
+		UPDATE CHATROOM
+		SET CHATROOM_ST_FL = 'B'
+		<choose>
+			<when test='chatRoomNo != null'>
+				WHERE CHATROOM_NO = #{chatRoomNo}			
+			</when>
+			<otherwise>
+				WHERE  CHATROOM_NO IN
+				<foreach collection="arrayB" item="arr" open="(" close=")" separator=",">
+					#{arr}
+				</foreach>
+			</otherwise>
+		</choose>
+	</update>
+	
+	
+	
+	
+	
+	<!-- 관리자 - 채팅방 차단 해제 -->
+	<update id="updatechatCancelBlock">
+		UPDATE CHATROOM
+		SET CHATROOM_ST_FL = 'N'
+		WHERE  CHATROOM_NO IN
+		<foreach collection="arrayB" item="arr" open="(" close=")" separator=",">
+			#{arr}
+		</foreach>
+	</update>
+	
+	<!-- 관리자 - 채팅방 삭제 -->
+	<delete id="updatechatDeleteBlock">
+		DELETE FROM CHATROOM
+		WHERE  CHATROOM_NO IN
+		<foreach collection="arrayB" item="arr" open="(" close=")" separator=",">
+			#{arr}
+		</foreach>
+	</delete>
+	
+	
+		
+	<!-- 관리자 -  채팅 읽음 처리 -->
+	<update id="updateReadFlagAdmin">
+		UPDATE  "CHATTING" SET READ_ST_FL = 'Y'
+		WHERE CHATROOM_NO = #{chatRoomNo}
+		AND SENDER_NO != #{managerNo}
+	</update>
+	
+	<!-- 관리자 - 채팅방 조회 -->
+	<select id="selectUserNo" resultType="_int">
+		SELECT USER_NO
+		FROM CHATROOM
+		WHERE CHATROOM_NO = #{chatRoomNo}
+	</select>
+	
+	<!-- 관리자 - 채팅방 회원 정보 조회 -->
+	<select id="selectChatRoomInfo" resultMap="chatroom_rm">
+		SELECT USER_NO, USER_NICKNAME, PROFILE_IMG, AUTHORITY, CHATROOM_ST_FL
+		FROM CHATROOM
+		JOIN "USER" USING(USER_NO)
+		WHERE CHATROOM_NO = #{chatRoomNo}
+	</select>
+	
+	
+	
+	
+
+</mapper>

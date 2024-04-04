@@ -1,0 +1,44 @@
+
+.info-userDelete-area{
+    width: 500px;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.info-userDelete-area > a{
+    color: #636363;
+}
+
+.secession-terms{
+
+    width:300px; 
+    height:63px;
+    
+    font-size:12px; 
+    
+    overflow:auto;
+    
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    border: 1px solid #aaaa; 
+}
+
+form[name='myPageFrm-session']{
+    display: flex;
+    flex-direction: column;
+}
+
+.myPage-session-row{
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#mysecessionFrm > button{
+    width: 300px;
+
+    margin-top: 20px;
+}

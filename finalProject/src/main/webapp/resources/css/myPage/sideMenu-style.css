@@ -1,0 +1,84 @@
+/* 사이드 바 큰 틀*/
+.left-side{
+    width: 200px;
+    height: 700px;
+    border-right: 2px solid #ddd;
+}
+
+.myPage-content{
+    display: flex;
+    justify-content: center;
+}
+
+/* 타이틀 */
+.side-title{
+    width: 100%;
+}
+
+#side-title{
+    font-size: 21px;
+    font-weight: bold;
+
+    color: #636363;
+
+}
+
+/* 서브 타이틀 */
+.side-subTitle{
+    width: 90%;
+
+    margin-top: 30px;
+
+    background-color: #dbdbdbbb;
+}
+
+#side-subTitle{
+    font-size: 18px;
+    font-weight: bold;
+
+    color: rgb(0,67,112);
+}
+
+/* 사이드 메뉴 목록 */
+.list-group{
+    width: 100%;
+
+    padding-right: 20px;
+    padding-left: 0;
+    
+    text-align: center;
+    list-style: none;
+
+}
+
+.list-group > li{
+    width: 90%;
+    height: 50px;
+
+    font-size: 18px;
+    list-style: none;
+}
+
+.list-group > li > a{
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 16px;
+    text-decoration: none;
+    
+    color:black;
+
+    border-bottom : 1px solid #ddd;
+}
+
+.list-group > li > a:hover{
+
+    font-size: 16px;
+    font-weight: bold;
+
+    color: rgb(0,67,112);
+    background-color: #ececec;
+}

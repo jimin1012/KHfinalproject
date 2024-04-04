@@ -1,0 +1,293 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: NanumSquareL;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareR;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareEB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.ttf) format("truetype")
+}
+
+/* 경기천년 */
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 폰트: 경기천년체 제목 바탕 */
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 상세조회 전체 영역 */
+.board-write {
+    width: 1000px;
+    min-height: 700px;
+    border: 1px solid #ccc;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+
+/* 게시글 제목 */
+.board-title {
+    margin: 0;
+    padding: 20px 0;
+    border-bottom: 3px solid #ccc;
+}
+
+.board-title>input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+
+    font-size: 24px;
+}
+
+.board-title:focus-within {
+    border-bottom-color: solid rgba(0, 67, 112, 0.705);
+}
+
+
+
+
+
+.img-box {
+    display: flex;
+    justify-content: center;
+    position: relative; 
+}
+
+
+/* 이미지를 감싸는 div */
+.boardImg {
+    width: 230px;
+    height: 230px;
+    display: inline-block;
+    text-align: center;
+
+    position: relative;
+}
+
+.boardImg>label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+
+    position: absolute; /* label을 절대적 위치로 설정 */
+    z-index: 1; /* 다른 요소보다 앞에 오도록 z-index 설정 */
+}
+
+.guideText{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.inputImage {
+    display: none;
+}
+
+
+/* 이미지 */
+.boardImg img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 썸네일만 이미지 크게 */
+.thumbnail {
+    width: 300px;
+    height: 300px;
+}
+
+
+
+/* 내용 */
+.board-content {
+    padding: 30px 0;
+    margin: 30px 0;
+    border-bottom: 3px solid #ccc;
+    font-size: 18px;
+}
+
+[name="boardContent"] {
+    width: 100%;
+    height: 400px;
+    resize: none;
+    font-size: 1.1em;
+}
+
+
+
+/* 버튼 영역 */
+.board-btn-area {
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: 200px;
+}
+
+/* 버튼 */
+.board-btn-area button {
+    width: 180px;
+    height: 50px;
+
+    font-size: 20px;
+    font-weight: bold;
+    border: 0;
+    background-color: rgba(0, 67, 112, 0.705);
+    color: white;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.board-btn-area button:hover {
+    background-color: rgba(0, 35, 112, 0.158);
+    color: rgba(0, 67, 112, 0.705);
+}
+
+
+/* 삭제 버튼 */
+.delete-image {
+    position: absolute;
+    top: 0;
+    right: 7px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+/* 상세조회 */
+
+/* 상세조회 썸네일 */
+.img {
+    margin-top: 50px;
+    width: 300px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 내용 */
+.reviewContent {
+    clear: both;
+    padding: 30px 0;
+    margin: 30px 0;
+    border-bottom: 3px solid #ccc;
+
+    font-size: 18px;
+
+    white-space: pre-wrap;
+}
+
+
+
+/* 별점 */
+.rating_box {
+    display: flex;
+}
+
+.rating {
+    position: relative;
+    color: #ddd;
+    font-size: 30px;
+    text-align: center;
+}
+
+.rating input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.rating_star {
+    width: 0;
+    color: #ffc107;
+    position: absolute;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+
+/* 보드 디테일 리뷰 컨테이터 */
+.review-container {
+    width: 900px;
+}
+
+.outline {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.point-div {
+
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: NanumSquareR;
+
+}
+
+/* 작성일 , 작성자 */
+.userName{
+    text-align: end;
+    font-family: NanumSquareR;
+    font-size: 15px;
+    
+    margin-top: 10px;
+}
+.createDate{
+    text-align: end;
+    font-family: NanumSquareR;
+    font-size: 15px;
+}

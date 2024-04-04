@@ -1,0 +1,97 @@
+/* 공지 게시판 */
+body{
+    margin: 0 auto;
+    height: 100vh;
+}
+main{
+    /* height: 100%; */
+}
+.content{
+    /* width: 1110px; */
+    width: 1200px;
+    min-height: 100%;
+    margin: 40px auto;
+}
+h1{
+    font-size: 30px;
+    border-bottom: 4px solid rgb(0, 67, 112);
+    margin-bottom: 0;
+}
+
+.board-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#boardFrm{
+    width: 100%;
+    height: 100%;
+}
+
+#boardFrm > div:first-child > label{
+    font-size: 20px
+}
+
+#boardFrm > div:first-child{
+    margin-top: 20px;
+    border-bottom: 1px solid gainsboro;
+    height: 50px;
+    font-size: 24px;
+}
+#subInfo{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid gainsboro;
+    align-items: center;
+    margin-bottom: 30px;
+}
+#subInfo > div:nth-child(2){
+    margin: 0 20px;
+}
+
+#boardFrm > div:nth-of-type(4){
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+ 
+}
+
+#writeBtn{
+    width: 100px;
+    height: 30px;
+    background-color: #004370;
+    color: white;
+    border: none;
+}
+
+#boardContent{
+    min-height: 500px;
+    max-height: 500px;
+    max-width: 1200px;
+    word-break:break-all;
+    overflow: auto;
+}
+
+#boardContent img{
+    
+    max-width: 400px;
+    height: auto;
+
+}
+
+#boardFrm button {
+    width: 100px;
+    height: 30px;
+    background-color: #004370;
+    color: white;
+    border: none;
+}
+
+#updateBtn{
+    margin: 0 10px;
+}
+
+

@@ -1,0 +1,174 @@
+
+.userName:hover{
+    cursor: pointer;
+}
+
+.board-writer{
+    position: relative;
+}
+
+.side1{
+    position: relative;
+}
+
+/* 게시글, 댓글 쪽지보내기 작은 창 */
+.writeMessage{
+    /* display: none; */
+    position: absolute;
+    z-index: 3000px;
+    top: 20px;
+    left: 100px;
+
+    width: 100px;
+    height: 40px;
+    border: 3px solid #455ba8;
+    border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+/* 자유,투표 게시글 작성자 */
+.boardFL{
+    top: 140px;
+    left: 150px;
+}
+
+
+main{
+    position: relative;
+}
+
+
+/* 모달 */
+.modalMessage {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    z-index: 50;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalMessage.showM {
+    display: flex;
+    animation-name: show;
+    animation-duration: 0.5s;
+    z-index: 500;
+}
+
+.modalMessage.hideM {
+    animation-name: hide;
+    animation-duration: 0.5s;
+}
+
+
+
+/* @keyframes : 
+애니메이션 중간중간의 특정 지점들을 거칠 수 있는 키프레임들을 설정함으로써 CSS 애니메이션 과정의 중간 절차를 제어할 수 있게 합니다.  */
+@keyframes showM {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes hideM {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+
+/* 쪽지 내용 작성 */
+#writeMessageArea{
+    background-color: white;
+    width: 500px;
+    height: 700px;
+    padding-top: 20px;
+   
+    margin: 5% 35%;
+}
+
+
+#writeMessageArea > div:nth-of-type(1){
+    width: 100%;
+    height: 50px;
+    padding-left: 30px;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #455ba8;
+    line-height: 50px;
+}
+
+.writeMessageContent{
+    width: 100%;
+    height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.writeMessageContent > *{
+    width: 90%;
+}
+
+.writeMessageContent > div{
+    font-size: 1.2em;
+    padding-bottom: 10px;
+}
+
+
+.writeMessageContent > textarea{
+    resize: none;
+    height: 95%;
+    font-size: 1.1em;
+}
+
+.writeMessageContent > textarea:focus{
+    outline: none;
+}
+
+
+/* 쪽지 글자수, 전송버튼 영역 */
+.countSendMessageArea{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 10px 30px;
+}
+
+
+#counter{
+    display: inline-block;
+    width: 50px;
+    text-align: end;
+}
+
+
+/* 전송, 닫기 버튼 꾸미기 */
+#modalMessageCloseBtn, #sendMessageBtn{
+    width: 85px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(94, 94, 94);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#modalMessageCloseBtn:hover{
+    background-color:  rgb(112, 144, 152);
+}
+
+#sendMessageBtn:hover{
+    background-color:  rgb(112, 144, 152);
+}

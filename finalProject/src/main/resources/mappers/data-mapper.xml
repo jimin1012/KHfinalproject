@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dataMapper">
+
+
+	<resultMap type="Acc" id="acc_rm">
+		<id property="accNo" column="ACC_NO" />
+
+		<result property="accName" column="ACC_NAME" />
+		<result property="accTel" column="ACC_TEL" />
+		<result property="accAddr" column="ACC_ADDR" />
+		<result property="accStFl" column="ACC_ST_FL" />
+		<result property="bossNo" column="BOSS_NO" />
+		<result property="accCategory" column="ACC_CATEGORY" />
+		<result property="openDate" column="OPEN_DATE" />
+	</resultMap>
+	
+	<resultMap type="AccCode" id="accCode_rm">
+		<id property="accCode" column="ACC_CODE" />
+		
+		<result property="accType" column="ACC_TYPE" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="accNo" column="ACC_NO" />
+	</resultMap>
+	
+	<resultMap type="Review" id="review_rm">
+		<id property="aReviewNo" column="A_REVIEW_NO" />
+
+		<result property="accReviewContent" column="A_REVIEW_CONTENT" />
+		<result property="accCreateDate" column="A_CREATE_DATE" />
+		<result property="accReviewDelFl" column="A_REVIEW_DEL_FL" />
+		<result property="accNo" column="ACC_NO" />
+		<result property="userNo" column="USER_NO" />
+	</resultMap>
+	
+	<resultMap type="Image" id="image_rm">
+		<id property="accImgNo" column="ACC_IMG_NO" />
+
+		<result property="accImgRename" column="ACC_IMG_RENAME" />
+		<result property="accImgOriginal" column="ACC_IMG_ORIGINAL" />
+		<result property="accImgLevel" column="ACC_IMG_LEVEL" />
+		<result property="accImgPath" column="ACC_IMG_PATH" />
+		<result property="accNo" column="ACC_NO" />
+	</resultMap>
+	
+	<resultMap type="Rate" id="rate_rm">
+		<id property="rateNo" column="RATE_NO" />
+
+		<result property="accCleanRate" column="A_CLEAN_RATE" />
+		<result property="accFacRate" column="A_FAC_RATE" />
+		<result property="accKindRate" column="A_KIND_RATE" />
+		<result property="accReviewNo" column="A_REVIEW_NO" />
+	</resultMap>
+
+
+	<insert id="insertData" parameterType="Acc">	
+		MERGE INTO ACC a
+			USING DUAL
+			ON (a.ACC_ADDR = #{REFINE_ROADNM_ADDR})
+			WHEN MATCHED THEN
+				UPDATE SET a.ACC_NAME = #{BIZPLC_NM}, a.ACC_TEL = #{BIZESTBL_TELNO}, a.ACC_CATEGORY = #{accCategory}, ACC_ST_FL = #{BSN_STATE_NM}
+			WHEN NOT MATCHED THEN
+				INSERT VALUES(SEQ_ACC_NO.NEXTVAL, #{BIZPLC_NM}, #{BIZESTBL_TELNO}, #{REFINE_ROADNM_ADDR}, #{BSN_STATE_NM}, 1231231234, #{accCategory}, SYSDATE)
+	</insert>
+	
+	<insert id="insertCh" parameterType="Acc">	
+		MERGE INTO ACC a
+			USING DUAL
+			ON (a.ACC_ADDR = #{SITEWHLADDR})
+			WHEN MATCHED THEN
+				UPDATE SET a.ACC_NAME = #{BPLCNM}, a.ACC_TEL = #{SITETEL}, a.ACC_CATEGORY = #{accCategory}, ACC_ST_FL = #{TRDSTATENM}
+			WHEN NOT MATCHED THEN
+				INSERT VALUES(SEQ_ACC_NO.NEXTVAL, #{BPLCNM}, #{SITETEL}, #{SITEWHLADDR}, #{TRDSTATENM}, 1231231234, #{accCategory}, SYSDATE)
+	</insert>
+	
+	
+	
+	<insert id="insertSeoul" parameterType="Acc">	
+		MERGE INTO ACC a
+			USING DUAL
+			ON (a.ACC_ADDR = #{SITEWHLADDR})
+			WHEN MATCHED THEN
+				UPDATE SET a.ACC_NAME = #{BPLCNM}, a.ACC_TEL = #{SITETEL}, a.ACC_CATEGORY = #{accCategory}, ACC_ST_FL = #{TRDSTATENM}
+			WHEN NOT MATCHED THEN
+				INSERT VALUES(SEQ_ACC_NO.NEXTVAL, #{BPLCNM}, #{SITETEL}, #{SITEWHLADDR}, #{TRDSTATENM}, 1231231234, #{accCategory}, SYSDATE)
+	</insert>
+	
+	<select id="autoSearch" resultMap="acc_rm">
+      SELECT ACC_ADDR
+      FROM ACC
+      WHERE ACC_ADDR LIKE '%${str}%'
+	</select>
+	
+	<select id="selectData" resultType="_int">
+		SELECT COUNT(*) FROM ACC
+	</select>
+	
+	
+	<select id="selectAllData" resultType="_int">
+		SELECT ACC_NO FROM(
+		    SELECT ROWNUM RNUM, A.* FROM(
+		        SELECT ACC_NO
+		        FROM ACC
+		    ) A
+		)WHERE RNUM = #{i}
+	</select>
+	
+	<select id="selectCodeAcc" resultType="_int">
+		SELECT ACC_NO FROM(
+		    SELECT ROWNUM RNUM, A.* FROM(
+		        SELECT ACC_NO
+		        FROM ACC_GRADE
+		    ) A
+		)WHERE RNUM = #{i}
+	</select>
+	
+	<select id="selectAllCode" resultType="_int">
+		SELECT COALESCE(ACC_CODE, -1) AS ACC_CODE
+		FROM (
+		    SELECT ROWNUM RNUM, A.* FROM (
+		        SELECT ACC_CODE
+		        FROM ACC_GRADE
+		    ) A
+		) WHERE RNUM = #{i}		
+	</select>
+	
+   <insert id="sampleData" parameterType="AccCode">
+      MERGE INTO ACC_GRADE a
+         USING DUAL
+         ON (ACC_CODE = #{accCode})
+         WHEN MATCHED THEN
+            UPDATE SET a.ROOM_CAPACITY = #{roomCapacity}, a.ACC_TYPE = #{accType}
+         WHEN NOT MATCHED THEN
+            INSERT VALUES(#{accCode}, #{accType}, #{roomPrice}, #{roomCapacity}, '14:00', '12:00', #{accNo})
+   </insert>
+	
+	<insert id="reviewData" parameterType="Review">
+		MERGE INTO ACC_REVIEW a
+			USING DUAL
+			ON (a.ACC_NO = #{accNo} AND a.USER_NO = #{userNo}) 
+			WHEN MATCHED THEN
+				UPDATE SET a.A_REVIEW_CONTENT = #{accReviewContent}, a.A_CREATE_DATE = SYSDATE
+			WHEN NOT MATCHED THEN
+				INSERT VALUES(SEQ_A_REV_NO.NEXTVAL, #{accReviewContent}, SYSDATE, DEFAULT, #{accNo}, #{userNo})
+	</insert>
+	
+	<insert id="imageData" parameterType="Image">
+		MERGE INTO ACC_IMAGE a
+			USING DUAL
+			ON (a.ACC_NO = #{accNo} AND ACC_IMG_LEVEL = #{accImgLevel})
+			WHEN MATCHED THEN
+				UPDATE SET a.ACC_IMG_RENAME = #{accImgRename}, a.ACC_IMG_ORIGINAL = #{accImgOriginal}, a.ACC_IMG_PATH = #{accImgPath}
+			WHEN NOT MATCHED THEN
+				INSERT VALUES(SEQ_ACC_IMG_NO.NEXTVAL, #{accImgRename}, #{accImgOriginal}, #{accImgLevel}, #{accImgPath}, #{accNo})
+	</insert>
+	
+	<select id="reviewSelectAll" resultType="_int">
+		SELECT COUNT(*) FROM ACC_REVIEW
+	</select>
+
+	<select id="selectReviewData" resultType="_int">
+		SELECT A_REVIEW_NO FROM(
+		    SELECT ROWNUM RNUM, A.* FROM(
+		        SELECT A_REVIEW_NO
+		        FROM ACC_REVIEW
+		    ) A
+		)WHERE RNUM = #{i}
+	</select>	
+
+	<insert id="insertRateData" parameterType="Rate">
+		MERGE INTO ACC_RATE a
+			USING DUAL
+			ON (a.A_REVIEW_NO = #{accReviewNo})
+			WHEN MATCHED THEN
+				UPDATE SET a.A_CLEAN_RATE = #{accCleanRate}, a.A_FAC_RATE = #{accFacRate}, A_KIND_RATE = #{accKindRate} 
+			WHEN NOT MATCHED THEN
+				INSERT VALUES(SEQ_RATE_NO.NEXTVAL, #{accCleanRate}, #{accFacRate}, #{accKindRate}, #{accReviewNo})
+	</insert>
+	
+
+
+	
+
+</mapper>

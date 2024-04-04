@@ -1,0 +1,65 @@
+/* 공지 게시판 */
+
+.content{
+    /* width: 1110px; */
+    width: 1200px;
+    height: 100%;
+    min-height: 500px;
+    margin: 40px auto;
+    
+}
+
+h1{
+    font-size: 30px;
+    border-bottom: 4px solid rgb(0, 67, 112);
+    margin-bottom: 0;
+}
+
+.board-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#boardFrm{
+    width: 100%;
+}
+
+#boardFrm > div:first-child > label{
+    font-size: 20px
+}
+
+#boardFrm > div:first-child{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 100px;
+    border-bottom: 1px solid gainsboro;
+}
+
+#boardFrm > div:nth-of-type(3){
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+#writeBtn{
+    width: 100px;
+    height: 30px;
+    background-color: #004370;
+    color: white;
+    border: none;
+}
+#boardTitle{
+    width: 94%;
+    height: 30px;
+}
+
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}

@@ -1,0 +1,51 @@
+#changePwFrm {
+    width: 700px;
+
+    /* border: 1px solid black; */
+}
+
+/* #changePwFrm * {
+    width: 700px;
+
+    border: 1px solid black;
+} */
+
+.myPage-row{
+    width: 400px;
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+}
+
+.myPage-row >label{
+    font-size: 18px;
+    /* font-weight: bold; */
+    padding-bottom: 5px;
+}
+
+input{
+    width: 370px;
+    height: 35px;
+
+    font-size: 20px;
+}
+
+#changePwBtn{
+    width: 377px;
+    
+
+    margin-top: 18px;
+}
+
+.signUp-message{
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #666;
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }

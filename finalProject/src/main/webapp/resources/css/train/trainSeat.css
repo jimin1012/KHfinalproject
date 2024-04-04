@@ -1,0 +1,359 @@
+
+main{
+    width:1150px;
+    margin: auto;
+}
+
+main *{
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    
+}
+
+/* 정보 */
+#trainInfo{
+
+    margin-top: 60px;
+    width: 1200px;
+    height: 150px;
+    padding: 5px;
+    background-color: rgb(0, 67, 112);
+    color: white;
+}
+
+#date{
+    height: 30px;
+}
+
+#trainInfo > div:nth-child(2){
+    height: 110px;
+    display: flex;
+}
+
+#destination{
+    height: 100%;
+    width: 20%;    
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#destination >span{
+    padding-top: 15px;
+    font-weight: 3em;
+}
+
+
+.des{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 3px solid white ;
+
+    text-align: center;
+    padding-top: 27px;
+    font-weight: bold;
+}
+
+.info{
+    padding-top: 30px;
+    margin-left: 10px;
+}
+
+/* 인원수 */
+#pCount{
+    margin: 40px auto;
+
+    width: 900px;
+    height: 80px;
+
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.box{
+    width: 180px;
+    height: 50px;
+
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 7px;
+    border-radius: 3px;
+
+
+    cursor: pointer;
+
+
+}
+
+.box:hover{
+    color: white;
+    background-color:  rgb(0, 67, 112);
+
+}
+
+.spec{
+    display: none;
+}
+
+.deleteBox{
+    color:  rgb(0, 67, 112);
+
+    border: 3px solid  rgb(0, 67, 112);
+}
+.selected {
+    background-color: rgb(0, 67, 112);
+    color: white;
+}
+
+.choiceBox{
+    color: white;
+    background-color:  rgb(0, 67, 112);
+}
+
+
+
+/* 호실 */
+#trainRoom{
+    /* margin-left: -350px; */
+    /* border: 1px solid black; */
+    width: 450px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#trainRoom > div:first-child{
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(0, 67, 112);
+}
+
+#roomNumber{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.rNum{
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    padding-top: 5px;
+    
+    border-radius: 5px;
+    color: rgb(0, 67, 112);
+    background-color: white;
+    border: 3px solid rgb(0, 67, 112);
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.rNum:hover{
+
+    background-color: rgb(0, 67, 112);
+    color: white;
+}
+
+.carN{
+    display: none;
+}
+
+.rNum.selected {
+    background-color: rgb(0, 67, 112);
+    color: white;
+}
+/* 좌석 */
+
+#trainSeat{
+    margin: 70px auto;
+    height: 300px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.rowS{
+    width: 750px;
+    height:100px;
+    border: 2px solid rgb(0, 67, 112); ;
+}
+
+
+.row2{
+    height: 45px;
+    width: 750px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tSeat{
+    height: 35px;
+    width: 35px;
+    background-color:  rgb(0, 67, 112);
+    cursor: pointer;
+
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.tSeat.selected {
+    background: #6feaf6;
+}
+
+
+.tSeat.occupied {
+    background: #fff;
+}
+
+.first{
+    background-color: #ddd;
+    text-align: center;
+    padding-top: 2px;
+    color: cornflowerblue;
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: default;
+}
+
+/* 예약정보 */
+
+#bookInfo{
+    width: 1150px;
+    height: 200px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    border: 2px solid rgb(0, 67, 112);
+
+}
+
+#seatInfo{
+    width: 25%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border-right: 2px solid #ddd;
+
+}
+
+#countInfo{
+    width: 40%;
+    height: 100%;
+
+    border-right: 2px solid #ddd;
+}
+
+table{
+    margin-top: 10px;
+    height: 110px;
+    
+}
+
+table td{
+    width: 140px;
+    text-align: center;
+}
+
+
+
+
+#priceInfo{
+    width: 30%;
+    height: 100%;
+}
+
+.infoTitle{
+    color: rgb(0, 67, 112);
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+.valueT{
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.moneyInfo{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+#finalPrice{
+    font-size:  25px;
+    font-weight: bold;
+}
+
+
+
+.moneyInfo >div:last-child{
+    width: 40px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #a4a2a2;
+}
+
+.btnArea{
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    width: 1200px;
+    
+}
+
+#checkBtn{
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    justify-items: end;
+
+    margin-left: 1100px;
+
+
+    color: rgb(0, 67, 112);
+    background-color: white;
+    border: 2px solid rgb(0, 67, 112);
+    border-radius: 5px;
+
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#checkBtn:hover{
+    background-color: rgb(0, 67, 112);
+    color: white;
+}
+
+
+
+
+
+/* 커스텀 셀렉트 박스 */
+#paymentMethod{
+    margin-top: 20px;
+    width: 200px;
+    height: 30px;
+}
+
+

@@ -1,0 +1,251 @@
+/* ///////////////////////////////////////////// */
+/* 내 게시글  */
+#myPost{
+    border: 1px solid black;
+}
+
+/* 내 게시글 */
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+@import url(https://fonts.googleapis.com/css?family=Oswald:700);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+
+
+
+table {
+  position: relative;
+  width: 700px;
+  
+}
+
+table th {
+    width: 700px;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ccc;
+    text-transform: uppercase;
+    font: 0.8em 'Oswald', sans-serif;
+}
+
+table th,
+table td {
+  padding: 0.4em;
+  font-size: 12px;
+}
+
+.fold-table > thead > tr > th:nth-of-type(1){
+    width: 50px;
+}
+
+.fold-table > thead > tr > th:nth-of-type(2){
+    width: 30px;
+}
+
+.fold-table > thead > tr > th:nth-of-type(3){
+    width: 100px;
+}
+
+.fold-table > thead > tr > th:nth-of-type(4){
+    width: 300px;
+}
+
+.fold-table > thead > tr > th:nth-of-type(5){
+    width: 100px;
+}
+
+.fold-table > thead > tr > th:nth-of-type(6){
+    width: 70px;
+}
+.fold-table > thead > tr > th:nth-of-type(7){
+    width: 50px;
+}
+
+.view > th:nth-of-type(1){
+    width: 40px;
+}
+
+.view > th:nth-of-type(2){
+    width: 100px;
+}
+
+.view > th:nth-of-type(3){
+    width: 300px;
+}
+
+.view > th:nth-of-type(4){
+    width: 500px;
+}
+.view > th:nth-of-type(5){
+    width: 100px;
+}
+
+.view> th:nth-of-type(6){
+    width: 70px;
+}
+.view> th:nth-of-type(7){
+    width: 50px;
+}
+
+
+table.fold-table {
+  background: #fff;
+  color: #555;
+}
+
+table.fold-table > tbody > tr.view {
+  font-family: 'Droid Serif', serif;
+  transition: all 0.3s ease;
+}
+
+table.fold-table > tbody > tr.view td:first-child,
+table.fold-table > tbody > tr.view th:first-child {
+  position: relative;
+  padding-left: 20px;
+}
+
+table.fold-table > tbody > tr.view td:first-child:before,
+table.fold-table > tbody > tr.view th:first-child:before {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  width: 9px;
+  height: 16px;
+  margin-top: -8px;
+  font: 16px fontawesome;
+  content: "\f0d7";
+  transition: all 0.3s ease;
+}
+
+/* .fold-table tr input{
+    margin-left: -15px;
+} */
+
+
+table.fold-table > tbody > tr.view:nth-child(4n-1) {
+  background: #eee;
+}
+
+table.fold-table > tbody > tr.view:hover {
+  background: #ddd;
+}
+
+table.fold-table > tbody > tr.view.open {
+  background: tomato;
+  color: #fff;
+}
+
+table.fold-table > tbody > tr.view.open td:first-child:before,
+table.fold-table > tbody > tr.view.open th:first-child:before {
+  transform: rotate(-180deg);
+  color: #fff;
+}
+
+table.fold-table > tbody > tr.fold {
+  display: none;
+}
+
+table.fold-table > tbody > tr.fold.open {
+  display: table-row;
+}
+
+.fold-content {
+  padding: 0.5em;
+}
+
+.fold-content > table {
+  background: #fff;
+  color: #555;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.fold-content > table > tbody > tr:nth-child(even) {
+  background: #eee;
+}
+
+.visible-small {
+  display: none;
+}
+
+.visible-big {
+  display: block;
+}
+
+@media (max-width: 700px) {
+  body {
+    font-size: 0.8em;
+    padding: 0 10px;
+  }
+
+  table th,
+  table td {
+    padding: 1em 0.2em;
+  }
+
+  table.small-friendly > thead {
+    display: none;
+  }
+
+  table.small-friendly > tbody > tr > td,
+  table.small-friendly > tbody > tr > th {
+    position: relative;
+    padding: 0;
+    padding-left: 50%;
+    display: block;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  table.small-friendly > tbody > tr > td:before,
+  table.small-friendly > tbody > tr > th:before {
+    position: absolute;
+    top: 0;
+    left: 0.5em;
+    max-width: 50%;
+    content: attr(data-th) ": ";
+    display: block;
+    font-weight: bold;
+  }
+
+  table.small-friendly > tbody > tr > td:first-child {
+    margin-top: 1em;
+  }
+
+  table.small-friendly > tbody > tr > td:last-child {
+    margin-bottom: 1em;
+    border: 0;
+  }
+
+  .visible-small {
+    display: block;
+  }
+
+  .visible-big {
+    display: none;
+  }
+}
+
+
+
+
+/* 쪽지 내용 추가 */
+.simpleContent{
+  height: 13.64px;
+  width: 330px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.messageTable{
+  /* width: 721px; */
+  width: 80%;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+
+
+.fold-content > p{
+  max-width: 500px;
+  word-break: break-all;
+}

@@ -1,0 +1,123 @@
+main{
+    width:500px;
+    margin: 100px auto;
+}
+
+main *{
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+} 
+
+.findContainer{
+    margin: 30px 0;
+    height: 50px;
+    display: flex;
+
+    border-bottom: 5px solid rgb(0, 55 , 112);
+
+}
+
+.findContainer >div{
+    width: 50%;
+    text-align: center;
+    padding-top: 10px;
+
+}
+
+.findContainer >div:nth-child(1){
+    background-color: rgb(0, 55 , 112);
+    
+}
+
+.findContainer >div:nth-child(2){
+    background-color: rgb(224, 224, 224);
+
+}
+
+
+
+.findContainer a{
+    font-weight: bolder;
+    font-size: 1.2em;
+    height: 100%;
+
+    display: block;
+
+    color: white;
+    text-decoration: none;
+}
+
+.findComment{
+    margin: 60px 20px 40px 20px;
+    height: 150px;
+    border: 2px solid rgb(0, 55 , 112);
+
+    border-radius: 6px;
+
+}
+
+p{
+    text-align: center;
+    word-spacing: 0.2em;
+    line-height: 1.8em;
+}
+
+h3{
+    text-align: center;
+}
+
+.comment{
+    /* background-color: red; */
+    /* color: red; */
+    /* margin-bottom: 10px; */
+    text-align: center;
+    height: 25px;
+    padding-top: 1px;
+}
+
+form{
+
+    height: 170px;
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    height: 43px;
+    padding: 5px 10px;
+
+    font-size: 16px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+.btnArea{
+
+    height: 170px;
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.findbtn{
+    height: 40px;
+    font-size: 15px;
+    font-weight: bold;
+
+    color: rgb(0, 55 , 112);
+    background-color: white;
+    border: 2px solid rgb(0, 55 , 112);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.findbtn:hover{
+    color: white;
+    background-color: rgb(0, 55 , 112);
+}

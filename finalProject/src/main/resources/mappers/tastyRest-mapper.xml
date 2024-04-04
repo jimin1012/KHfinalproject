@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tastyMapper">
+
+	<resultMap id="restReview_rm" type="TastyRest">
+		<result property="reviewNo" column="R_REVIEW_NO" />
+		<result property="title" column="R_REVIEW_TITLE" />
+		<result property="boardContent" column="R_REVIEW_CONTENT" />
+		<result property="createDate" column="R_CREATE_DATE" />
+		<result property="starPoint" column="R_STAR_POINT" />
+		<result property="userNo" column="USER_NO" />
+		<result property="userName" column="USER_NAME" />
+		<result property="restName" column="R_PLACE_NAME" />
+		<result property="thumbnail" column="R_THUMBNAIL" />
+	</resultMap>
+
+
+	<insert id="insertReview">
+		INSERT INTO "RESTAURANT_REVIEW"
+		VALUES(
+		SEQ_R_REV_NO.NEXTVAL, #{title},
+		#{boardContent}, DEFAULT, DEFAULT, #{starPoint},
+		#{userNo}, #{restName}, #{thumbnail})
+	</insert>
+
+	<select id="getReviewList" resultMap="restReview_rm">
+		SELECT REST.* , U.USER_NAME
+		FROM "RESTAURANT_REVIEW" REST
+		JOIN "USER" U ON REST.USER_NO = U.USER_NO
+		WHERE REST.R_PLACE_NAME = #{restName}
+		ORDER BY R_REVIEW_NO
+		DESC
+	</select>
+
+	<select id="getReviewDetail" resultMap="restReview_rm">
+		SELECT REST.* , U.USER_NAME
+		FROM "RESTAURANT_REVIEW" REST
+		JOIN "USER" U ON REST.USER_NO = U.USER_NO
+		WHERE R_REVIEW_NO = ${reviewNo}
+	</select>
+
+	<delete id="deleteReview">
+		DELETE "RESTAURANT_REVIEW"
+		WHERE R_REVIEW_NO = #{reviewNo}
+	</delete>
+
+
+
+
+</mapper>

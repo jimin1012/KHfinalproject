@@ -1,0 +1,415 @@
+* {
+    box-sizing: border-box;
+}
+
+/* 페이지 종류 */
+.page-title{
+    width: 1200px;
+    border-bottom: 3px solid rgb(0, 55, 112);
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+body{
+    height: 100vh;
+    margin: 0;
+}
+main{
+    min-height: 650px;
+}
+
+
+.ticketing-Area {
+
+
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    margin: auto;
+    width: 780px;
+    height: 160px;
+    padding: 10px;
+}
+
+
+#ticketing-row-1 {
+    height: 50%;
+    width: 100%;
+    display: flex;
+
+    background-color: transparent;
+}
+
+/* 출발지 도착지 부분 */
+#ticketing-1-1 {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    /* margin-right: 15px; */
+}
+
+#ticketing-1-1>div {
+    display: flex;
+    width: 45%;
+    flex-direction: column;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+    margin-right: 16px;
+
+    cursor: pointer;
+}
+
+#stationNameD{
+    margin-top: 7px;
+    font-size: 23px;
+}
+
+#stationCodeD{
+    display:none;
+}
+
+#stationNameA{
+    margin-top: 7px;
+    font-size: 23px;
+}
+
+#stationCodeA{
+    display:none;
+}
+
+.selectCity {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    height: 40%;
+}
+
+/* 날짜 선택 부분 */
+#ticketing-1-2 {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+
+    margin-right: 10px;
+
+}
+
+#ticketing-1-2>input {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    height: 40%;
+}
+
+#ticketing-row-2 {
+    margin-top: 10px;
+    height: 50%;
+    width: 100%;
+    display: flex;
+}
+
+#seat-area{
+    font-size: 13px;
+}
+
+#ticketing-2-1 {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height: 70%;
+    padding: 5px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    /* background: #f3f4f6; */
+    margin-right: 10px;
+}
+#ticketing-2-1 label{
+    margin-right: 10px;
+    color: #f3f4f6;
+}
+#ticketing-2-1>span {
+    margin-bottom: 10px;
+}
+
+#ticketing-2-2 {
+    width: 21%;
+    margin-left: 10px;
+    
+}
+
+#ticketing-2-2>button {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 55, 112);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* display: flex; */
+
+}
+
+#ticketing-2-2>button:hover {
+    cursor: pointer;
+    background-color: rgba(0, 55 , 112, 0.9);
+    font-weight: bold;
+    /* border: 2px solid black; */
+}
+/* span 태그 */
+.name {
+    font-weight: bold;
+}
+
+.ui-datepicker-trigger{
+    display: none;
+    width: 40px;
+    height: 40px;
+}
+
+
+
+input[type="radio"] {
+    appearance: none;
+    background-color: rgb(250, 250, 250);
+    width: 13px;
+    height: 13px;
+    opacity: 30%;
+    
+    border: none;
+    margin: 0;
+    margin-left: 3px;
+}
+
+input[type="radio"]:hover{
+    cursor: pointer;
+}
+input[type="radio"]:checked{
+    background-color:#8b004d;
+    opacity: 1;
+}
+
+label:hover{
+    cursor: pointer;
+}
+
+
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.662); /* 투명한 검은색 배경 */
+    z-index: 999; /* 모달보다 앞에 표시 */
+    display: none; /* 처음에는 숨김 */
+}
+
+
+
+
+.modalArea {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1000; 
+    display: none;  
+    width: 750px;
+    
+} 
+
+#cancelBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+/* .modalArea {
+    position: fixed;
+
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 1000; 
+    display: none; 처음에는 숨김
+    width: 750px;
+    height: 750px;
+    position: relative;
+    display: none; 
+    
+} */
+
+
+ 
+/* .modalArea {
+    margin-top: 20px;
+    /* width: 700px; */
+    /* border: solid black 1px; */
+
+
+
+
+#cancelBtn {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    color:  rgba(0, 55 , 112);
+    cursor: pointer;
+} 
+
+
+.titleArea{
+    background-color: rgba(0, 55 , 112);
+    height: 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
+
+
+}
+
+.cityCheckArea{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-around;
+
+    flex-wrap: wrap;
+    margin: 15px auto;
+    height: 250px;
+}
+
+.cityCheck, .desCheck{
+    display: none;
+}
+
+
+
+.cityBox{
+
+    width: 130px;
+    height: 45px;
+    margin: 10px;
+
+    color: rgb(0, 55, 112);
+
+    text-align: center;
+    padding-top: 5px;
+    border: solid rgb(0, 55, 112) 3px;
+    border-radius: 5px;
+}
+
+
+
+.title{
+
+    margin-top: 40px;
+    height: 50px;
+    /* padding-left: 290px; */
+    /* padding-top: 10px; */
+
+    text-align: center;
+
+    /* background-color: #ddd; */
+    color: rgb(0, 55, 112);
+    font-size: 20px;
+    font-weight: bold;
+
+
+}
+
+.desti{
+    margin: 0 auto;
+    width: 650px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: rgba(0, 54, 112, 0.126);
+}
+
+.destiBox{
+    width: 120px;
+    height: 45px;
+    margin: 10px 10px;
+
+    color: rgb(0, 55, 112);
+
+    text-align: center;
+    padding: 8px;
+    border: solid rgb(0, 55, 112) 3px;
+    border-radius: 5px;
+}
+
+.selectedCity {
+    background-color: rgb(0, 55, 112);
+    color: white;
+}
+
+#stationBtnM{
+    width: 150px;
+    height: 35px;
+    margin-top: 30px ;
+    margin-left: 275px;
+
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: white;
+    color: rgb(0, 55, 112);
+    cursor: pointer;
+
+    border: 3px solid rgb(0, 55, 112);
+}
+
+#stationBtnM:hover{
+    background-color: rgb(0, 55, 112);
+
+    color: white;
+}
+
+
+#stationBtn{
+    width: 150px;
+    height: 35px;
+
+    margin-top: 30px ;
+    margin-left: 275px;
+
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: white;
+    color: rgb(0, 55, 112);
+    cursor: pointer;
+
+    border: 3px solid rgb(0, 55, 112);
+}
+
+#stationBtn:hover{
+    background-color: rgb(0, 55, 112);
+
+    color: white;
+}
+
+

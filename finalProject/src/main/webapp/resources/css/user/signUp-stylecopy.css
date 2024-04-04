@@ -1,0 +1,701 @@
+/* 회원가입 전체 공통 */
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.container{
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.signUp-content{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+}
+
+/* 로고 */
+.signUp-content > h1{
+    font-size: 42px;
+}
+
+.signUp-content > h1 > a{
+    font-weight: bolder;
+    
+    text-decoration: none;
+    color: #004370;
+}
+
+/* 제목 */
+.title{
+    width: 500px;
+    height: 30px;
+    
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    border-bottom: 2px solid #9999;
+}
+
+.title > p{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 진행상황 */
+.progress{}
+
+.form-title{
+    width: 500px;
+    margin-bottom: 10px;
+}
+
+.form-title > label{
+    font-weight: bold;
+}
+
+/* 회원가입 버튼 */
+#signUpBtn{
+    width: 100%;
+    padding: 10px;
+    margin: 50px 0;
+    border: none;
+
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #004370;
+    color : white;
+    cursor: pointer;
+}
+
+
+#signUpBtn:active{
+    transform: scale(0.95);
+}
+
+/* 버튼 */
+.btn{
+    width:500px; 
+
+    padding-top: 10px;
+
+    display: flex;
+    justify-content: right;
+
+    border-top: 2px solid #9999;
+}
+
+/* 뒤로 버튼 */
+.back-button{
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    color: #004370;
+    
+}
+.back-button:hover{
+    color: white;
+    background-color: #004370;
+    border: none;
+}
+
+/* 다음 버튼 */
+.next-button{
+    width: 100px;
+    height: 30px;
+
+    margin-left: 30px;
+
+    font-weight: bold;
+    color: #004370;
+}
+
+/* 사업자 회원가입 링크 */
+/* .bossInsert{
+    width: 500px;
+    
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    
+} */
+
+/* .bossInsert > a{
+    
+    text-decoration: none;
+    color: #004370;
+
+    border-bottom: 1px solid #004370;
+} */
+
+/* .bossInsert > a:hover{
+   font-weight: bold;
+} */
+
+/* 약관동의 */
+/* 부제목 */
+.titleSub{
+    width: 500px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+
+}
+
+.titleSub > p{
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.titleSub > p > span{
+    font-size: 12px;
+
+    color: #424242aa;
+}
+
+.form-group{
+    margin-bottom: 20px;
+}
+
+/* 전체 동의 */
+.form-check-all > .checkbox-group{
+    margin-bottom: 10px;
+}
+.form-check-all > .form-detail{
+    height: 20px;
+    border: none;
+}
+.form-check-all > .form-detail > span{
+    color: #424242aa;
+}
+
+.checkbox-group{
+    width: 500px;
+    
+    display: flex;
+    justify-content: left;
+
+    /* border: 1px solid black; */
+}
+
+.form-detail{
+    width:500px; 
+    height:63px;
+
+    font-size:12px; 
+    
+    overflow:auto;
+
+    margin-bottom: 10px;
+
+    border: 1px solid #aaaa; 
+}
+
+
+/* 회원가입 정보입력 */
+
+/* 부제목 */
+.titleSub1{
+    width: 500px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+
+}
+
+.titleSub1 > p{
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.titleSub1 > p > span{
+    font-size: 12px;
+
+    color: #424242aa;
+}
+
+.titleSub2{
+    width: 500px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+
+    border-top: 1px solid #9999;
+}
+
+.titleSub2 > p{
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.titleSub2 > p > span{
+    font-size: 12px;
+
+    color: #424242aa;
+}
+
+
+.personalInformation{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* border: 1px solid black; */
+
+}
+.signUp-input-area{
+    width: 500px;
+    margin-bottom: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid black; */
+}
+
+.int_message{
+    width: 500px;
+    height: 20px;
+    justify-content: left;
+    margin-bottom: 10px;
+    /* border: 1px solid black; */
+}
+
+.box{
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+}
+
+/* 인풋창 스타일 */
+.box > input{
+    width: 100%;
+    height: 30px;
+    border: 1px solid #aaaa;
+    /* border: none; */
+}
+
+.box > input:focus{
+   
+    outline: 2px solid #004370;
+    /* border: none; */
+}
+
+.int_managerCode input:focus{
+   
+    outline: 2px solid #004370;
+    /* border: none; */
+}
+
+
+/* 유효성 검사 */
+
+.mg{
+    width: 500px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mg label{
+    width: 230px;
+    border: 1px solid #aaaa;
+}
+
+/* 성별 */
+.int_userGender input[type=radio] {
+    display: none;
+}
+
+.int_userGender label {
+    display: block;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    height: -webkit-fill-available;
+    line-height: 45px;
+}
+
+/* Checked */
+.int_userGender input[type=radio]:checked + label {
+    background: #004370;
+    color: #fff;
+}
+ 
+.int_userGender label {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+ 
+/* Hover */
+.int_userGender label:hover {
+    color: #666;
+}
+ 
+/* Disabled */
+.int_userGender input[type=radio] + label {
+    color: #666;
+}
+
+/* 이름 */
+#userName{
+    width: 500px;
+}
+
+/* 생년월일 */
+#userBirthDate{
+    width: 500px;
+}
+
+/* 휴대폰 */
+.tel{
+    display: flex;
+    flex-direction: column;
+}
+.tel > span{
+    margin-top: 10px;
+}
+
+.int_userTel{
+    width: 500px;
+    justify-content: space-between;
+}
+
+#userTel{
+    width: 370px;
+}
+
+#checkTelAuthKeyBtn{
+    width: 110px;
+    height: 30px;
+
+    border:1px solid #aaa;
+
+}
+
+
+
+/* 주소 */
+.addr{
+    display: flex;
+    flex-direction: column;
+}
+
+.addr > span{
+    margin-top: 10px;
+}
+
+.int_userAddress{
+    width: 500px;
+
+    justify-content: space-between;
+
+}
+
+#sample6_postcode{
+    width: 370px;
+}
+#sample6_address{
+    width: 500px;
+}
+#sample6_detailAddress{
+    width: 500px;
+}
+
+#addressCheckBtn{
+    width: 110px;
+    height: 30px;
+
+    border:1px solid #aaa;
+
+}
+
+#addressCheckBtn:hover{
+    color: white;
+    background-color: #004370;
+    border: none;
+
+}
+
+/* input 위아래 간격 조정용 */
+.addbon{
+    height: 10px;
+}
+
+/* 입력 관련 메세지 */
+.signUp-message{
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #666;
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
+
+
+
+
+
+/* --------------------------------------------------------- */
+
+/* 기본정보 입력 페이지 */
+
+/* 관리자 */
+.int_managerCode{
+    width: 500px;
+    height: 30px;
+
+    margin-bottom: 3px;
+
+    justify-content: space-between;
+    border: none;
+}
+
+.int_managerCode > div:nth-of-type(1){
+    width: 200px;
+    height: 100%;
+}
+
+#managerCode{
+    width: 370px;
+    height: 30px;
+    border: 1px solid #aaaa;
+    background-color: transparent; 
+
+}
+
+.int_managerCode > div:nth-of-type(2){
+    width: 110px;
+    display: flex;
+    justify-content: right;
+}
+
+
+/* 아이디 */
+.int_userId{
+    width: 500px;
+
+    justify-content: space-between;
+
+    /* border: 1px solid black;  */
+
+}
+#userId{
+    width: 100%;
+}
+
+#idCheckBtn{
+    width: 80px;
+    height: 30px;
+
+    border:1px solid #aaa;
+
+}
+
+#idCheckBtn:hover{
+    color: white;
+    background-color: #004370;
+    border: none;
+
+}
+
+/* 비밀번호 */
+.fas{
+    color: rgb(185, 185, 185);
+}
+
+.pw{
+    display: flex;
+    flex-direction: column;
+}
+
+.int_userPw{
+    width: 500px;
+    position: relative;
+}
+.int_userPw > .eyes{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0 50px;
+    height: 30px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.int_userPwConfirm{
+    width: 500px;
+
+    margin-top: 10px;
+
+    position: relative;
+}
+
+.int_userPwConfirm > .eyes2{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0 50px;
+    height: 30px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+/* 비밀번호 자물쇠 */
+.pswdImg {
+    position: absolute;
+    right: 10px;
+    width: 18px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* 닉네임 */
+.int_userNickname{
+    width: 500px;
+
+    justify-content: space-between;
+
+    /* border: 1px solid black;  */
+
+}
+#userNickname{
+    width: 100%;
+}
+
+#userNicknameBtn{
+    width: 80px;
+    height: 30px;
+
+    border:1px solid #aaa;
+
+}
+
+#userNicknameBtn:hover{
+    color: white;
+    background-color: #004370;
+    border: none;
+
+}
+
+/* 이메일 */
+.email{
+    display: flex;
+    flex-direction: column;
+}
+
+.email > span{
+    margin-top: 10px;
+}
+.int_userEmail{
+    width: 500px;
+
+    justify-content: space-between;
+
+    /* border: 1px solid black;  */
+
+}
+#userEmail{
+    width: 370px;
+}
+
+#sendAuthKeyBtn{
+    width: 110px;
+    height: 30px;
+
+    border:1px solid #aaa;
+
+}
+
+#sendAuthKeyBtn:hover{
+    color: white;
+    background-color: #004370;
+    border: none;
+
+}
+
+/* 인증번호 */
+.int_authKey{
+    width: 500px;
+    justify-content: space-between;
+
+    /* border: 1px solid black;  */
+
+}
+
+#authKey{
+    width: 370px;
+}
+
+#checkAuthKeyBtn{
+    width: 110px;
+    height: 30px;
+
+    border:1px solid #aaa;
+
+}
+
+#checkAuthKeyBtn:hover{
+    color: white;
+    background-color: #004370;
+    border: none;
+
+}
+
+/* --------------------------------------------------------- */
+
+/* 사업자 회원가입 페이지 */
+
+/* 사업자 회원 부가정보 */
+.form-check-all > .form-detailBoss{
+    width: 500px;
+    height: 50px;
+    border: none;
+}
+
+.form-check-all > .form-detailBoss > span{
+    font-size: 13px;
+    color: #424242aa;
+}
+
+/* 입금계좌 */
+.int_bossAccount{
+    width: 400px;
+
+    justify-content: space-between;
+
+    /* border: 1px solid black;  */
+
+}
+#bossAccount{
+    width: 300px;
+}
+
+#bossAccountSelect{
+    width: 80px;
+    height: 30px;
+
+    border:1px solid #aaa;
+
+}

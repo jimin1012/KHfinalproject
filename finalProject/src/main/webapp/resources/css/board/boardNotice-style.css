@@ -1,0 +1,171 @@
+/* 공지 게시판 */
+
+.content{
+    /* width: 1110px; */
+    width: 1200px;
+    margin: 40px auto;
+}
+body{
+    margin: 0;
+}
+h1{
+    font-size: 30px;
+    border-bottom: 4px solid rgb(0, 67, 112);
+    margin-bottom: 0;
+}
+
+/* 공지사항 목록 */
+.list-area{
+    width: 100%;
+    min-height: 500px;
+}
+
+.notice-table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+/* 테이블 header */
+.notice-table > thead{
+    height: 50px;
+    border-bottom: 2px solid grey;
+}
+
+
+.notice-table > thead > tr{
+    font-size: 20px;
+}
+
+
+.notice-table th{
+    height: 100%;
+}
+
+.notice-table tr > *:nth-of-type(1){width: 10%;}
+.notice-table tr > *:nth-of-type(2){
+    width: 50%;
+}
+.notice-table tr > *:nth-of-type(3){width: 15%;}
+.notice-table tr > *:nth-of-type(4){width: 15%;}
+.notice-table tr > *:nth-of-type(5){width: 10%;}
+
+
+.notice-table > tbody > tr > *:nth-of-type(2){
+    text-align: left;
+    padding-left: 40px;
+}
+
+.notice-table td{
+    height: 50px;
+}
+
+
+.notice-table td > a{
+    text-decoration: none;
+    color: black;
+}
+
+.notice-table td > a:hover{
+    text-decoration: underline;
+}
+
+
+/* 테이블 body끝  */
+.notice-table > tbody{
+    border-bottom: 4px solid rgb(0, 67, 112);
+}
+
+
+/* 글쓰기 버튼 */
+.write-area{
+    height: 40px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#writeBtn{
+
+    width: 90px;
+    height: 35px;
+    color: white;
+    background-color: rgb(0, 67, 112);
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* form{border: 1px solid black;} */
+
+#boardSearch{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+#boardSearch > select{
+    margin-right: 5px;
+}
+
+#boardSearch > input{
+    width: 200px;
+    
+}
+
+#searchBoardBtn{
+    width: 60px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(0, 67, 112);
+    border: 0;
+    /* border-radius: 5px; */
+}
+
+
+
+
+
+
+
+/* 페이지네이션 */
+.pagination-area{
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.pagination-area > ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+/* .pagination-area li{
+    color: black;
+} */
+
+.pagination-area a{
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    padding: 5px 10px;
+}
+
+.pagination-area a:hover{
+    text-decoration: underline;
+}
+
+
+.current{
+    color: white;
+    font-weight: bold;
+    background-color: rgb(0, 67, 112);
+    border-radius: 5px;
+}

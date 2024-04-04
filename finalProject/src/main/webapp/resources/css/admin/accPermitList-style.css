@@ -1,0 +1,171 @@
+
+
+/* ---- 사업자승인요청 ---- */
+
+main{
+    width: 100%;
+}
+
+h3{
+    text-align: justify;
+}
+
+
+.main-box{
+    max-width: 1000px;
+    height: 600px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.main-box > div:first-child{
+    margin-bottom: 10px;
+}
+
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* 테이블 */
+.main-table{
+    height: 520px;
+    max-width: 100%;
+}
+
+#applyTable{
+    table-layout: fixed;
+    border-collapse: collapse;
+    cursor: pointer;
+    max-width: 100%;
+    display: block;
+
+    border-bottom: 3px solid rgb(112, 144, 152);
+}
+
+
+#applyTable > thead{
+    /* background-color: rgb(112, 144, 152); */
+    background-color: #ccc;
+    border-bottom: 2px solid #ccc;
+    height: 35px;
+}
+
+
+
+
+
+#applyTable th:nth-child(1){ width: 49px; }
+#applyTable th:nth-child(2){ width: 97px; }
+#applyTable th:nth-child(3){ width: 234px; }
+#applyTable th:nth-child(4){ width: 238px; }
+#applyTable th:nth-child(5){ width: 136px; }
+#applyTable th:nth-child(6){ width: 137px; }
+#applyTable th:nth-child(7){ width: 108px; }
+
+
+#applyTable > tbody{
+    text-align: center;
+
+    display: block;
+    width: 1000px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+
+
+#applyTable td:nth-child(1){ width: 50px; }
+#applyTable td:nth-child(2){ width: 100px; }
+#applyTable td:nth-child(3){ width: 250px; }
+#applyTable td:nth-child(4){ width: 250px; }
+#applyTable td:nth-child(5){ width: 140px; }
+#applyTable td:nth-child(6){ width: 140px; }
+#applyTable td:nth-child(7){ width: 90px; }
+
+
+#applyTable td:nth-child(3) > div{ 
+    width: 250px; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+
+}
+
+
+#applyTable > tbody tr{ 
+    width: 1000px;
+    border-bottom: 2px solid #ccc;
+}
+
+
+/* 승인요청 상세조회 */
+.applyDetail{
+    height: 200px;
+    text-align: left;
+    display: none;
+    padding-left: 100px;
+}
+
+.applyDetail > td{
+    padding-left: 20px;
+    transition-duration: 0.5s;
+}
+
+.applyDetail div{
+    margin: 20px 0;
+    padding-left: 40px;
+}
+
+
+/* 사업자 아이디, 전화번호 영역*/
+.applyDetail  div:nth-of-type(1){
+    width: 80%;
+    padding-left: 150px;
+}
+
+.applyDetail  div:nth-of-type(1) > span{
+    
+    padding-right: 10px;
+   
+}
+
+/* 사업자등록증, 숙소 정보 영역 */
+.applyDetail div:nth-of-type(2){
+    display: flex;
+    width: 100%;
+}
+
+/* 사업자등록증 정보 */
+.infoBusinessRegister{
+    width: 80%;
+    padding-left: 120px;
+    line-height: 40px;
+    /* border: 1px solid black; */
+}
+
+/* 숙소 정보 */
+/* .infoAcc{
+    width: 50%;
+    line-height: 40px;
+}
+
+.infoAcc > ul{
+    list-style: none;
+    line-height: 20px;
+    margin-top: 0;
+} */
+
+/* 선택된 tr 표시 */
+.selectedApply{
+    background-color:  rgb(112, 144, 152);
+    color: white;
+}
+
+.unselectedApply{
+    background-color: white;
+    color: black;
+}
+
+

@@ -1,0 +1,269 @@
+/* 국내축제 게시판 */
+body{
+    margin: 0;
+}
+.content{
+    /* width: 1110px; */
+    width: 1200px;
+    margin: 40px auto
+}
+
+h1{
+    font-size: 30px;
+    border-bottom: 4px solid rgb(0, 67, 112);
+}
+
+
+/* select Box, 카테고리 영역 */
+.selectBoxCategoryArea{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    line-height: 50px;
+}
+
+/* 셀렉트박스 */
+#festivalSelectFrm{
+    width: 60%;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
+#festivalSelectFrm > div{
+    width: 230px;
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 67, 112);
+    margin-right: 5px;
+}
+
+
+
+#festivalSelectFrm  i{
+    width: 30px;
+    height: 30px;
+    line-height: 27px;
+    text-align: center;
+}
+
+
+#festivalSelectFrm  select{
+    height: 30px;
+    width: 200px;
+    padding: 0px 5px;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+}
+
+#festivalSelectFrm  select:focus{
+    outline: none;
+}
+
+
+
+#selectFesBtn{
+    width: 80px;
+    height: 30px;
+    vertical-align: middle;
+    border: 0;
+    border-radius: 5px;
+    background-color: rgb(0, 67, 112);
+    color: white;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+
+
+
+/* 카테고리 */
+#categoryArea{
+    width: 40%;
+    display: flex;
+    justify-content: end;
+    padding-right: 10px;
+}
+
+#categoryArea > button{
+   border: none;
+   background-color: white;
+   font-size: 1.1em;
+}
+
+#categoryArea > button:hover{
+    text-decoration: underline;
+}
+
+/* 카테고리 선택O */
+.cSelected{
+    color:  rgb(0, 67, 112);
+    font-weight: bold;
+}
+
+/* 카테고리 선택X */
+.cUnSelected{
+    color:  black;
+    font-weight: normal;
+}
+
+
+/* 게시글 목록 */
+.fetivalListArea{
+    width: 100%;
+    min-height: 300px;
+    padding: 10px;
+
+}
+
+
+.fetivalListArea > ul{
+    width: 100%;
+    height: 100%;
+
+    list-style: none;
+    display: flex;
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    padding: 20px 35px;
+}
+
+
+
+.fetivalListArea > ul > li{
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    padding-top: 5px;
+    margin: 10px 35px;
+}
+
+
+.fetivalListArea > ul > li  div:nth-of-type(4){
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+
+
+
+.fetivalListArea  a{
+    text-align: justify;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.fetivalListArea  a:hover{
+    text-decoration: underline;
+}
+
+
+.imgContainer{
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.fetivalBoard  img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* 글쓰기 버튼 */
+.write-area{
+    height: 40px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#writeBtn{
+
+    width: 90px;
+    height: 35px;
+    color: white;
+    background-color: rgb(0, 67, 112);
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* form{border: 1px solid black;} */
+
+/* #boardSearch{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+#boardSearch > select{
+    margin-right: 5px;
+}
+
+#boardSearch > input{
+    width: 200px;
+    
+}
+
+#boardSearch > button{
+    width: 60px;
+    font-size: 16px;
+    cursor: pointer;
+} */
+
+
+
+
+/* 페이지네이션 */
+.pagination-area{
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.pagination-area > ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+/* .pagination-area li{
+    padding: 0 10px;
+} */
+
+.pagination-area a{
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    padding: 5px 10px;
+}
+
+.pagination-area a:hover{
+    text-decoration: underline;
+}
+
+.current{
+    color: white;
+    font-weight: bold;
+    background-color: rgb(0, 67, 112);
+    border-radius: 5px;
+}

@@ -1,0 +1,151 @@
+/* 공지 게시판 */
+
+.content{
+    /* width: 1110px; */
+    width: 1200px;
+    height: 100%;
+    min-height: 500px;
+    margin: 40px auto;
+    
+}
+
+h1{
+    font-size: 30px;
+    border-bottom: 4px solid rgb(0, 67, 112);
+    margin-bottom: 0;
+}
+
+.board-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#boardFrm{
+    width: 100%;
+}
+
+#boardFrm > div:first-child > label{
+    font-size: 20px
+}
+
+#boardFrm > div:first-child{
+    margin-top: 20px;
+    border-bottom: 1px solid gainsboro;
+    height: 50px;
+    font-size: 24px;
+}
+/* #subInfo{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid gainsboro;
+    align-items: center;
+    margin-bottom: 10px;
+}
+#subInfo > div:nth-child(2){
+    margin: 0 20px;
+}
+
+ */
+
+#subInfo{
+    /* display: flex; */
+    position: relative;
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid gainsboro;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+.writerInfoBox{
+    display: flex;
+}
+
+#subInfo > .writerInfoBox > div:nth-child(2){
+    margin: 0 20px;
+}
+
+
+
+
+
+
+
+
+#boardFrm > div:nth-of-type(5){
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+ 
+}
+
+#writeBtn{
+    width: 100px;
+    height: 30px;
+    background-color: #004370;
+    color: white;
+    border: none;
+}
+
+#boardContent{
+    max-width: 100%;
+    min-height: 300px;
+    word-break:break-all;
+}
+
+#boardContent  img{
+    max-width: 400px;
+    height: auto;
+}
+
+
+#festivalInfo{
+    margin-bottom: 30px;
+}
+
+#boardFrm  button{
+    width: 100px;
+    height: 30px;
+    background-color: #004370;
+    color: white;
+    border: none;
+}
+#updateBtn{
+    margin: 0 10px;
+}
+
+
+
+/* 게시글 신고 버튼 */
+.reportBoardArea{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.reportBoardArea > div{
+    width: 1150px;
+    text-align: end;
+}
+
+
+
+
+#reportBtn{
+    background-color: #004370;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+
+    /* margin-right: 10%; */
+}

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userMapper">
+
+	<resultMap type="User" id="user_rm">
+
+		<!-- DB의 기본 키(복합키면 여러 개 작성) -->
+		<id property="userNo" column="USER_NO" />
+
+		<!-- DB의 일반 컬럼들 -->
+		<result property="userName" column="USER_NAME" />
+		<result property="userBirthDate" column="USER_BIRTH" />
+		<result property="userGender" column="USER_GENDER" />
+		<result property="userBirthDate" column="USER_BIRTH" />
+		<result property="userAddress" column="USER_ADDR" />
+
+		<result property="userId" column="USER_ID" />
+		<result property="userPw" column="USER_PW" />
+		<result property="userNickname" column="USER_NICKNAME" />
+		<result property="userEmail" column="USER_EMAIL" />
+
+		<result property="userTel" column="USER_TEL" />
+
+		<result property="profileImage" column="PROFILE_IMG" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="userDeleteFlag" column="USER_DEL_FL" />
+		<result property="authority" column="AUTHORITY" />
+
+
+
+		<result property="bossNo" column="BOSS_NO" />
+		<result property="bossAccount" column="BOSS_ACCOUNT" />
+
+		<result property="accName" column="ACC_NO" />
+		<result property="accName" column="ACC_NAME" />
+		<result property="accTel" column="ACC_TEL" />
+		<result property="openDate" column="OPEN_DATE" />
+		<result property="accAddress" column="ACC_ADDR" />
+
+	</resultMap>
+
+	<!-- 회원가입 -->
+	<insert id="signUp" parameterType="User">
+		INSERT INTO "USER"
+		VALUES(SEQ_USER_NO.NEXTVAL,#{userName}, #{userBirthDate},
+		#{userGender}, #{userAddress}, #{userId}, #{userPw}, #{userNickname},
+		#{userTel}, #{userEmail}, SYSDATE, DEFAULT, DEFAULT, #{authority})
+
+	</insert>
+
+	<!-- 휴대폰 중복 확인 -->
+	<select id="checkTel" resultType="_int">
+		SELECT COUNT(*)
+		FROM "USER"
+		WHERE USER_TEL = #{tel}
+		AND USER_DEL_FL = 'N'
+	</select>
+	
+	<!-- 아이디 중복 확인 -->
+	<select id="checkId" resultType="_int">
+		SELECT COUNT(*)
+		FROM "USER"
+		WHERE USER_ID = #{id}
+		AND USER_DEL_FL = 'N'
+	</select>
+
+	<!-- 닉네임 중복 확인 -->
+	<select id="checkNickName" resultType="_int">
+		SELECT COUNT(*)
+		FROM "USER"
+		WHERE USER_NICKNAME = #{id}
+		AND USER_DEL_FL = 'N'
+	</select>
+
+	<!-- 이메일 중복 확인 -->
+	<select id="checkEmail" resultType="_int">
+		SELECT COUNT(*)
+		FROM "USER"
+		WHERE USER_EMAIL = #{email}
+		AND USER_DEL_FL = 'N'
+	</select>
+
+	<!-- 일반로그인 -->
+	<select id="login" parameterType="User" resultMap="user_rm">
+		SELECT
+		USER_NO, USER_ID, USER_NAME, USER_GENDER, USER_EMAIL,
+		USER_NICKNAME,USER_BIRTH,USER_GENDER, USER_PW,
+		USER_TEL, USER_ADDR, PROFILE_IMG, AUTHORITY,
+		TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE
+		FROM "USER"
+		WHERE USER_ID = #{userId}
+		AND USER_DEL_FL = 'N'
+	</select>
+	
+	<!-- sns로그인 -->
+	<select id="snsLogin" resultMap="user_rm">
+		SELECT USER_NO, USER_ID,
+		USER_NAME, USER_GENDER, USER_EMAIL,
+		USER_NICKNAME,USER_BIRTH,USER_GENDER, USER_PW,
+		USER_TEL, USER_ADDR, PROFILE_IMG, AUTHORITY,
+		TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE
+		FROM "USER"
+		WHERE USER_ID = #{userId}
+		AND USER_PW = #{userPw}
+		AND USER_DEL_FL = 'N'
+	</select>
+	
+	<!-- 존재하는 계정인지 체크 -->
+	<select id="selectSnsUser" resultMap="user_rm">
+		SELECT USER_ID, USER_PW
+		FROM "USER"
+		WHERE USER_EMAIL = #{email}
+	</select>
+
+	<!-- ************** 휴대폰 인증 ********************* -->
+	<select id="selectPhoneNum" resultType="_int">
+		SELECT COUNT(*) FROM
+		"USER"
+		WHERE USER_TEL = #{phoneNum}
+	</select>
+
+	<select id="selectUserNo" resultType="_int">
+		SELECT USER_NO FROM "USER"
+		WHERE USER_TEL = #{phoneNum}
+	</select>
+
+	<select id="selectId" resultType="string">
+		SELECT USER_ID FROM "USER"
+		WHERE USER_NO = #{memberNo}
+	</select>
+
+	<!-- ************** 이메일 인증 ********************* -->
+
+	<select id="selectEmail" resultType="_int">
+		SELECT COUNT(*) FROM "USER"
+		WHERE USER_EMAIL = #{emailInput}
+	</select>
+
+	<select id="selectUserNo2" resultType="_int">
+		SELECT USER_NO FROM "USER"
+		WHERE USER_EMAIL = #{emailInput}
+	</select>
+
+
+	<!-- ************** 사업자 회원 전환 ********************* -->
+	
+	<!-- BOSS 테이블 삽입 쿼리 -->
+	<insert id="insertBoss" parameterType="User">
+		INSERT INTO BOSS (BOSS_NO, BOSS_ACCOUNT, USER_NO)
+		VALUES (#{bossNo}, #{bossAccount}, #{userNo})
+	</insert>
+
+	<!-- ACC 테이블 삽입 쿼리 -->
+	<insert id="insertAcc" parameterType="User">
+		INSERT INTO ACC (ACC_NO, ACC_NAME, ACC_TEL, ACC_ADDR, ACC_ST_FL, BOSS_NO,
+		OPEN_DATE)
+		VALUES (SEQ_ACC_NO.NEXTVAL, #{accName}, #{accTel}, #{accAddress}, 'R',
+		#{bossNo}, #{openDate})
+	</insert>
+
+	<!-- USER 테이블 업데이트 쿼리 -->
+	<update id="updateUserAuthority" parameterType="User">
+		UPDATE "USER"
+		SET AUTHORITY = 2
+		WHERE USER_NO = #{userNo}
+	</update>
+	
+	<!-- 사업자 번호 중복 확인 -->
+	<select id="checkBossNo" resultType="_int">
+		SELECT COUNT(*)
+		FROM "BOSS"
+		JOIN "USER" ON "BOSS"."USER_NO" = "USER"."USER_NO"
+		WHERE "BOSS_NO" = #{bossNo}
+		AND "USER_DEL_FL" = 'N'
+	</select>
+
+</mapper>

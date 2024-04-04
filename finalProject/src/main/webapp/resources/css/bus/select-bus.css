@@ -1,0 +1,93 @@
+/* 조회 결과 있을 시 나타날 div 영역 */
+.select-bus-list{ /*  */
+    display: none;
+
+    width: 1200px;
+    margin: auto;
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+/* 왼쪽 출,도착 버스 터미널 정보  */
+#bus-data{
+    width: 20%;
+    height: 450px;
+    padding: 5px;
+    background-color: rgb(0,55,112);
+    color: white;
+}
+
+/* 날짜 */
+#DepDate{
+    display: inline-block;
+    font-size: 18px;
+    width: 100%;
+    padding: 3px;
+    border-bottom:1px solid white ;
+    font-weight: 400;
+}
+/* 출,도착 터미널 영역 */
+#terminal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+}
+
+.circle{
+    margin-top: 10px;
+    display: flex;
+    background-color: white;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    color: black;
+    border-radius: 50%;
+}    
+#start,#end{
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* 오른쪽 테이블 영역 */
+#bus-table{
+    width: 80%;
+    height: 450px;
+    overflow: auto;
+}
+
+#tt{
+    border-collapse : collapse;
+}
+thead>tr{
+    height: 40px;
+}
+
+tbody>tr{
+    text-align: center;
+    height: 30px;
+}
+tbody>tr>td:last-child{
+    background-color: rgb(0,55,112);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 조회 결과가 없을 경우 나타날 화면 */
+.select-none{
+    display: none;
+    margin: auto;
+    width: 1200px;
+    text-align: center;
+    height: 450px;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 100px;
+}

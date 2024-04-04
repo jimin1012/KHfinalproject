@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: NanumSquareL;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareR;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareEB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {margin: 0;}
+.side-menu {
+
+    position: relative;
+    display: table-cell;
+    width: 395px;
+    min-height: 900px;
+
+    background-color: #fff;
+    box-shadow: 5px 1px 8px 0 rgba(0,0,0,.06);
+    border-left: 1px solid rgba(0, 0, 0, .08);
+    vertical-align: top;
+    z-index: 1;
+
+}
+
+.title {
+    padding: 20px 20px 0 20px;
+
+    font-family: 'NanumSquareL';
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.side-menu > section:nth-child(2){
+
+    margin-top: 25%;
+}
+
+/* 사업장 프로필 이미지 */
+.circle-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+}
+
+.circle-img>img {
+
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border-top: 2px solid rgba(0, 67, 112, 0.349);
+    background-color: aliceblue;
+    box-shadow: 3px 6px 3px 3px rgba(0, 67, 112, 0.349);
+
+}
+
+/* a태그 속성 */
+.side-menu a {
+    position: relative;
+    color: black;
+}
+
+/* menu:hover:after {
+    content: '';
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 4px;
+    border-bottom: 2px solid #888888ad;
+    position: absolute;
+} */
+
+
+/* 사업장 이름 */
+.accName{
+    margin-top: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+    
+    font-family: NanumSquareL;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.list > a{
+    text-decoration: none;
+    font-family: NanumSquareL;
+}
+.list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    font-size: 25px;
+}
+

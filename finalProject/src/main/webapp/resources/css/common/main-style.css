@@ -1,0 +1,776 @@
+/* ---------------------------------------------------------------- */
+/* 메인페이지 */
+
+body{
+    margin: 0;
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+/* 이미지 슬라이드 */
+/* .main-container1{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    
+} */
+
+/* .main-container1 {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    background-image: url(/resources/images/main/mainImage1.png), url(/resources/images/main/mainImage1.png), url(/resources/images/main/mainImage1.png);
+    background-position: left top, right bottom; 
+    background-repeat: no-repeat, repeat; 
+    background-color: rgba(255, 255, 255, 0.5);
+    filter: blur(5px);
+}
+
+.main-viewContainer{
+    width: 1200px;
+    height: 400px;
+    overflow: hidden;
+   
+}
+
+.main-view{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.main-view{
+    margin-bottom: 20px;
+    text-align: center;
+    height:400px;
+    overflow:hidden;
+}
+
+.main-view ul{
+    width:calc(100% * 3);
+    display:flex;
+    animation:slide 15s infinite; 
+    padding: 0;
+} 
+
+.main-view li{
+    width:calc(100% / 3);
+    height:300px;
+}
+
+  
+@keyframes slide {
+    0% {margin-left:0;}
+    10% {margin-left:0;}
+    25% {margin-left:-100%;}
+    35% {margin-left:-100%;} 
+    50% {margin-left:-200%;}
+    60% {margin-left:-200%;}
+    100% {margin-left:0;}
+} */
+
+.main-container1 {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    position: relative; /* 가상 요소를 위한 상대적 위치 지정 */
+}
+
+.main-container1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/resources/images/main/mainImage1.png), url(/resources/images/main/mainImage1.png), url(/resources/images/main/mainImage1.png);
+    background-position: left top, right bottom, center;
+    background-repeat: no-repeat;
+    
+    filter: blur(5px); /* 배경 이미지를 5px만큼 흐리게 설정 */
+    z-index: -10000; /* 배경 이미지를 뒤로 보내기 위해 z-index 설정 */
+}
+
+.main-viewContainer {
+    width: 1200px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.main-view {
+    margin-bottom: 20px;
+    text-align: center;
+    height: 400px;
+    overflow: hidden;
+    position: relative; /* 자식 요소의 위치를 상대적으로 설정하기 위해 */
+}
+
+.main-view ul {
+    width: calc(100% * 3);
+    display: flex;
+    padding: 0;
+    animation: slide 15s infinite;
+}
+
+.main-view li {
+    width: calc(100% / 3);
+    height: 300px;
+}
+
+@keyframes slide {
+    0% {margin-left:0;}
+    10% {margin-left:0;}
+    25% {margin-left:-100%;}
+    35% {margin-left:-100%;}
+    50% {margin-left:-200%;}
+    60% {margin-left:-200%;}
+    100% {margin-left:0;}
+}
+
+
+.cater3-movingBG {
+      height: 1vh;
+      filter: none;
+
+}
+
+/* 문구 */
+.flyinTxtCont {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+   
+    margin-top: -200px;
+    margin-left: 30px;
+}
+.flyIn {
+    color:#fff;
+    font-family:'Raleway';
+    text-transform:uppercase;
+    position:relative;
+    text-shadow: 2px 2px 40px rgba(0,0,0,0.7);
+
+}
+
+
+.lineOne, .lineTwo {
+    font-size:20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+}
+
+#lineTwo{
+    font-size: 35px;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////// */
+.main-container2{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 20px;
+
+    background-color: #eaeaea;
+}
+
+/* 예약 조회 */
+/* 조회 큰 틀 */
+.totalReserv{
+    width: 1200px;
+    height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    background-image: url(/resources/images/main/ticket.png);
+    background-size: cover;
+
+}
+
+.totalReservNav{
+    width: 900px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+} 
+
+/* 탭 스타일 */
+.reservNav {
+    width: 800px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+
+    /* margin-top: 30px; */
+
+}
+
+.reservNav > a{
+    font-size: 18px;
+    font-weight: bold;
+  } 
+  
+
+.reservNav li {
+    width: 120px;
+    height: 30px;
+
+    cursor: pointer;
+    border-radius: 15px;
+
+    text-align: center;
+    line-height: 30px;
+
+    font-size: 14px;
+
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.reservNav li:hover {
+    color: white;
+    background-color: #438eff;
+}
+
+.reservNav li {
+    background-color: #7b86a5; /* 활성화된 탭의 배경색 */
+    color: #fff; /* 활성화된 탭의 텍스트 색상 */
+    border: 1px solid white;
+}
+
+/* 탭 내용 스타일 */
+.reservNav-content {
+    width: 800px;
+    height: 160px;
+
+    display: none;
+    padding: 16px; /* 패딩 조정 */
+    /* background-color: #f9f9f9; */
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.reservNav-content.current {
+    display: block;
+}
+/* /////////////////////////////////////////////////////////////////////////// */
+
+/* 게시글 조회 */
+
+/* 자유 게시판 */
+
+
+/* 축제 게시판 */
+.festival-list{
+    width: 1200px;
+    height: 430px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #ffffff;
+
+    background-image: url(/resources/images/main/mainbul.png);
+}
+
+#commingSoon{
+    width: 1150px;
+    margin-bottom: 25px;
+}
+
+.festival-titleArea{
+    width: 1100px;
+    height: 165px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* border: 1px solid black; */
+}
+
+.festival-list a{
+    text-decoration: none;
+    
+    color: #002b3c;
+}
+
+#main-festivalTitle{
+    font-size: 28px;
+    font-weight: bold;
+
+    color: #545454;
+}
+
+#main-festivalSub{
+    font-size: 18px;
+    font-weight: normal;
+
+    color: #747474;
+}
+
+.festival-area{
+    height: 300px;
+    
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4개의 열을 가진 그리드 */
+    grid-gap: 20px;
+    justify-content: center;
+    
+}
+
+#festival-item{
+    width: 255px;
+    height: 200px;
+}
+
+#festivalImg{
+    width: 255px;
+    height: 170px;
+
+    border-radius: 15px;
+}
+
+.festival-info{
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+
+    border-bottom: 1px solid #eaeaea;
+}
+
+/* 축제 게시글 내용 이미지 */
+.festival-info img{
+    display: none;
+}
+
+#infoPlus{
+    margin-left: 240px;
+
+    color: #747474;
+}
+
+
+/* 투표 게시판 */
+.voting-board{
+    width: 1200px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 30px;
+
+}
+
+.voting-area{
+    width: 100%;
+    height: 350px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.voting-first{
+    width: 600px;
+    height: 350px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid black;
+}
+
+.vFirst-title{
+    width: 600px;
+    height: 40px;
+}
+
+.vFirst-container{
+    width: 600px;
+    height: 300px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.vFirst-content{
+    width: 300px;
+    height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    
+
+    border: 1px solid black;
+}
+.vFirst-img{
+    width: 200px;
+    height: 200px;
+
+    border-radius: 50%;
+    border: 1px solid black;
+
+}
+
+.voting-box{
+    width: 600px;
+    height: 350px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid black;
+}
+
+.voting-container{
+    width: 600px;
+    height: 300px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border: 1px solid black;
+}
+.voting-list{
+    width: 300px;
+}
+
+.voting-img{
+    width: 150px;
+    height: 300px;
+
+    border: 1px solid black;
+
+}
+
+
+/* 투표 게시글 테이블 css */
+/* 테이블 전체 스타일 */
+.voting-list {
+    width: 350px;
+    height: 100px;
+    border-collapse: collapse;
+}
+
+/* 테이블 헤더 스타일 */
+.voting-list th {
+    height: 30px;
+
+    padding: 8px;
+    
+    text-align: left;
+    
+    border: 1px solid #dddddd;
+    background-color: #f2f2f2;
+}
+
+/* 테이블 셀 스타일 */
+.voting-list td {
+    height: 30px;
+
+    padding: 8px;
+    
+    text-align: left;
+
+    border: 1px solid #dddddd;
+}
+
+/* 짝수 번째 행 배경색 변경 */
+.voting-list tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 홀수 번째 행 배경색 변경 */
+.voting-list tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+
+/* /////////////////////////////////////////////////////////////////////////// */
+
+/* 숙소 이벤트 */
+/* 이벤트 가장 큰 틀 */
+
+.main-container3{
+    width: 100%;
+    height: 650px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eaeaea;
+}
+.accevent-area{
+    width: 1200px;
+    height:600px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: #ffffff;
+
+    margin: auto;
+
+    /* border: 1px solid black; */
+}
+
+/* 실직적 큰 틀 */
+.accevent-container{
+    width: 1200px;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+}
+
+.slideshow-container{
+    width: 437px;
+    height: 264px;
+    border-radius: 9px;
+
+    margin-top: 29px;
+    margin-left: 34px;
+}
+
+.slideshow-image{
+    border-radius: 9px;
+}
+
+.accevent-time{
+    width: 1200px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+
+    background-image: url(/resources/images/main/timedil.png);
+    
+}
+
+#timeMent{
+    font-size: 21px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 70px;
+}
+
+/* 시간초 */
+#remainingTime{
+    font-size: 30px;
+    font-weight: bold;
+    
+
+    color: #99e1ff;
+}
+
+/* 메인 이벤트 */
+.accevent-content1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 숙소 이벤트 정보 */
+.accevent-info{
+    width: 926px;
+    height: 320px;
+
+    display: flex;
+    border-radius: 30px;
+    
+    background-image: url(/resources/images/main/hotelBener.png);
+    background-size: cover;
+}
+
+#accCheckBtn{
+    width: 340px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+
+    margin-top: 242px;
+    margin-left: 78px;
+
+    border-radius: 30px;
+
+    line-height: 50px;
+
+    background-color: #438eff;
+}
+
+#accCheckBtn > a{
+    display: block;
+    color: #fefefe;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+
+
+}
+
+.accevent-content2{
+    width: 1200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+
+    padding-top: 15px;
+
+}
+.acc-itemArea{
+    width: 926px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 15px;
+
+}
+
+.acc-item{
+    width: 197px;
+    height: 180px;
+}
+.acc-item:hover{
+    opacity: 80%;
+    color: #438eff;
+}
+
+#accImg{
+    width: 197px;
+    height: 110px;
+    border-radius: 9px;
+}
+
+.acc-info{
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.acc-info > span{
+    color: #545454;
+}
+
+
+
+.accevent-price{
+    width: 500px;
+    display: flex;
+    justify-content: right;
+}
+
+#priceText{
+    font-size: 14px;
+    color: #363636;
+}
+
+#priceP{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* 날씨 */
+.weather-area{
+    width: 765px;
+    height: 130px;
+
+    display: flex;
+
+    background-image: url(/resources/images/main/weather.png);
+    background-size: cover;
+    margin: auto;
+    padding: auto;
+
+}
+
+#weatherNoshow{
+    margin-top: 10px;
+    margin-left: 360px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #ffffff;
+}
+
+.weather-container{
+    width: 300px;
+    height: 160px;
+
+    display: flex;
+
+    margin-top: 50px;
+}
+
+.weather-area1{
+    display: flex;
+    
+}
+.temperature{
+    margin-left: 20px;
+
+    font-size: 38px;
+    font-weight: bold;
+
+    color: #ffffff;
+}
+
+.weather-area2{
+    display: flex;
+    flex-direction: column;
+}
+
+.place{
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+}
+.description{
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.weather-area3{
+    width: 50px;
+    height: 50px ;
+}
+

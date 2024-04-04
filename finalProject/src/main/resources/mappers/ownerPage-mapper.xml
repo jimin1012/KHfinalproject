@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ownerPageMapper">
+
+
+	<resultMap id="img_rm" type="ACCImageOwner">
+		<result property="accImgNo" column="ACC_IMG_NO" />
+		<result property="accImgRename" column="ACC_IMG_RENAME" />
+		<result property="accImgOriginal" column="ACC_IMG_ORIGINAL" />
+		<result property="accImgLevel" column="ACC_IMG_LEVEL" />
+		<result property="accImgPath" column="ACC_IMG_PATH" />
+		<result property="accNo" column="ACC_NO" />
+		<result property="srcPath" column="SRC_PATH" />
+	</resultMap>
+
+
+	<resultMap id="room_rm" type="ACCGradeOwner">
+		<result property="accCode" column="ACC_CODE" />
+		<result property="accType" column="ACC_TYPE" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="roomCapacity" column="ROOM_CAPACITY" />
+		<result property="roomCheckIn" column="ROOM_CHECKIN" />
+		<result property="roomCheckOut" column="ROOM_CHECKOUT" />
+		<result property="accNo" column="ACC_NO" />
+	</resultMap>
+
+	<!-- 통계 -->
+	<resultMap id="stats_rm" type="ACCOwnerStats">
+		<result property="accNo" column="ACC_NO" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="accName" column="ACC_NAME" />
+		<result property="resnStartDate" column="RESERV_START_DATE" />
+		<result property="resnEndDate" column="RESERV_END_DATE" />
+		<result property="resPeople" column="RES_PEOPLE" />
+	</resultMap>
+
+
+
+	<!-- 예약 정보 -->
+	<resultMap id="acc_reservation_rm" type="ACCResnOwner">
+
+		<result property="accNo" column="ACC_NO" />
+
+		<result property="accType" column="ACC_TYPE" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="roomCapacity" column="ROOM_CAPACITY" />
+
+		<result property="resPeople" column="RES_PEOPLE" />
+		<result property="accCode" column="ACC_CODE" />
+
+		<result property="reservationNo" column="ACC_CODE" />
+
+		<result property="reservationNo" column="RESERVATION_NO" />
+		<result property="reservationName" column="RESERVATION_NAME" />
+		<result property="reservationDelFl" column="RESERVATION_DEL_FL" />
+		<result property="reservationStartDate" column="RESERV_START_DATE" />
+		<result property="reservationEndDate" column="RESERV_END_DATE" />
+		<result property="price" column="PRICE" />
+		<result property="payTime" column="PAY_TIME" />
+		<result property="userNo" column="USER_NO" />
+
+		<result property="userName" column="USER_NAME" />
+		<result property="userTel" column="USER_TEL" />
+
+	</resultMap>
+
+
+
+
+	<resultMap id="owner_rm" type="Owner">
+
+		<!-- 회원 ID -->
+		<id property="userNo" column="USER_NO" />
+
+		<!-- 회원 정보 -->
+		<result property="userName" column="USER_NAME" />
+		<result property="authority" column="AUTHORITY" />
+
+		<!-- 숙소 정보 -->
+		<result property="accNo" column="ACC_NO" />
+		<result property="accName" column="ACC_NAME" />
+		<result property="accTel" column="ACC_TEL" />
+		<result property="accAddr" column="ACC_ADDR" />
+		<result property="accStFl" column="ACC_ST_FL" />
+		<result property="accCategory" column="ACC_CATEGORY" />
+		<result property="openDate" column="OPEN_DATE" />
+
+		<!-- 사업자 정보 -->
+		<result property="bossNo" column="BOSS_NO" />
+		<result property="bossAccount" column="BOSS_ACCOUNT" />
+	</resultMap>
+
+
+	<select id="getOwnerInfo" resultMap="owner_rm">
+		SELECT
+		U.*,
+		A.*,
+		B.BOSS_ACCOUNT
+		FROM "ACC" A
+		JOIN BOSS B ON A.BOSS_NO = B.BOSS_NO
+		JOIN
+		"USER" U ON B.USER_NO = U.USER_NO
+		WHERE U.USER_NO = ${userNo}
+	</select>
+
+
+	<select id="getRooms" resultMap="room_rm">
+		SELECT * FROM ACC_GRADE
+		WHERE
+		ACC_NO = ${accNo}
+		ORDER BY ACC_CODE
+	</select>
+
+	<select id="getImgs" resultMap="img_rm">
+		SELECT AIMG.* , ACC_IMG_PATH || ACC_IMG_RENAME AS "SRC_PATH"
+		FROM "ACC_IMAGE" AIMG
+		WHERE ACC_NO = #{accNo}
+		ORDER BY ACC_IMG_NO DESC
+	</select>
+
+	<update id="updateAccount">
+		UPDATE BOSS
+		SET BOSS_ACCOUNT = #{bossAccount}
+		WHERE
+		USER_NO = ${userNo}
+	</update>
+
+	<update id="infoUpdate">
+		UPDATE "ACC"
+		SET ACC_TEL = #{accTel},
+		ACC_ADDR =
+		#{accAddr},
+		ACC_ST_FL = #{accStFl}
+		WHERE ACC_NO = ${accNo}
+	</update>
+
+	<!-- mainIagme있는지 확인 -->
+	<select id="checkImg" resultType="_int">
+		SELECT COUNT(*)
+		FROM ACC_IMAGE
+		WHERE ACC_IMG_LEVEL = 0
+		AND ACC_NO = ${accNo}
+	</select>
+
+
+	<!-- mainIagme업데이트 -->
+	<update id="mainImageUpdate">
+		UPDATE ACC_IMAGE
+		SET ACC_IMG_PATH = #{accImgPath},
+		ACC_IMG_RENAME = #{accImgRename},
+		ACC_IMG_ORIGINAL = #{accImgOriginal}
+		WHERE ACC_NO = #{accNo}
+		AND ACC_IMG_LEVEL = '0'
+	</update>
+
+
+	<!-- mainIagme insert -->
+	<insert id="mainImageInsert">
+		INSERT INTO "ACC_IMAGE"
+		VALUES
+		(SEQ_ACC_IMG_NO.NEXTVAL,
+		#{accImgRename},
+		#{accImgOriginal},
+		0,
+		#{accImgPath},
+		#{accNo})
+	</insert>
+
+	<delete id="deleteAccImg">
+		DELETE
+		FROM ACC_IMAGE
+		WHERE ACC_IMG_NO = ${accImgNo}
+		AND ACC_NO = ${accNo}
+	</delete>
+
+
+	<insert id="insertAccImg">
+		INSERT INTO "ACC_IMAGE" (
+		ACC_IMG_NO,
+		ACC_IMG_RENAME,
+		ACC_IMG_ORIGINAL,
+		ACC_IMG_LEVEL,
+		ACC_IMG_PATH,
+		ACC_NO
+		)
+		VALUES (
+		SEQ_ACC_IMG_NO.NEXTVAL,
+		#{accImgRename},
+		#{accImgOriginal},
+		(SELECT
+		NVL(MAX(ACC_IMG_LEVEL), 0) + 1 FROM "ACC_IMAGE" WHERE ACC_NO =
+		#{accNo}),
+		#{accImgPath},
+		#{accNo}
+		)
+	</insert>
+
+	<!-- 숙소 예약 리스트 조회 -->
+
+	<select id="getResnListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		"ACC_RESERVATION" ARESN
+		JOIN "RESERVATION" RESN ON RESN.RESERVATION_NO
+		= ARESN.RESERVATION_NO
+		WHERE RESN.RESERVATION_DEL_FL = 'N'
+		AND
+		ARESN.ACC_NO = #{accNo}
+	</select>
+
+	<select id="selectReservationList" resultMap="acc_reservation_rm">
+		SELECT
+		ARESN.* ,
+		RESN.* ,
+		U.USER_NAME , U.USER_TEL ,
+		AG.ACC_TYPE , AG.ROOM_PRICE, AG.ROOM_CAPACITY
+		FROM "ACC_RESERVATION"
+		ARESN
+		JOIN "RESERVATION" RESN
+		ON
+		RESN.RESERVATION_NO =
+		ARESN.RESERVATION_NO
+		JOIN "USER" U
+		ON RESN.USER_NO = U.USER_NO
+		JOIN
+		"ACC_GRADE" AG ON AG.ACC_CODE = ARESN.ACC_CODE
+		WHERE ARESN.ACC_NO =
+		${accNo}
+		AND
+		RESN.RESERVATION_NO IS NOT NULL
+		AND
+		RESERVATION_DEL_FL = 'N'
+	</select>
+
+	<!-- 오늘 예약 목록 -->
+	<select id="getTodayListCount" resultType="_int">
+
+		SELECT COUNT(*)
+		FROM
+		"ACC_RESERVATION" ARESN
+		JOIN "RESERVATION" RESN ON
+		RESN.RESERVATION_NO = ARESN.RESERVATION_NO
+		WHERE
+		RESN.RESERVATION_DEL_FL = 'N'
+		AND
+		RESN.RESERV_TYPE = 'A'
+		AND
+		ARESN.ACC_NO = #{accNo}
+
+		<choose>
+			<when test='key == "today"'>
+				AND
+				TRUNC(TO_DATE(RESERV_START_DATE, 'YYYY-MM-DD HH24:MI')) = TRUNC(SYSDATE)
+			</when>
+		</choose>
+
+
+	</select>
+
+	<select id="getTodayList" resultMap="acc_reservation_rm">
+		SELECT
+		ARESN.* ,
+		RESN.* ,
+		U.USER_NAME , U.USER_TEL ,
+		AG.ACC_TYPE ,
+		AG.ROOM_PRICE, AG.ROOM_CAPACITY
+		FROM "ACC_RESERVATION" ARESN
+		JOIN
+		"RESERVATION" RESN
+		ON
+		RESN.RESERVATION_NO = ARESN.RESERVATION_NO
+		JOIN
+		"USER"
+		U
+		ON RESN.USER_NO = U.USER_NO
+		JOIN "ACC_GRADE" AG ON AG.ACC_CODE
+		= ARESN.ACC_CODE
+		WHERE ARESN.ACC_NO = #{accNo}
+		AND
+		RESN.RESERVATION_NO IS
+		NOT NULL
+		AND RESERVATION_DEL_FL = 'N'
+		AND RESN.RESERV_TYPE = 'A'
+
+		<choose>
+			<when test='key == "today"'>
+				AND TRUNC(TO_DATE(RESERV_START_DATE, 'YYYY-MM-DD HH24:MI')) = TRUNC(SYSDATE)
+			</when>
+		</choose>
+	</select>
+
+	<update id="updateRoom">
+		UPDATE "ACC_GRADE"
+		SET ACC_TYPE = #{accType},
+		ROOM_PRICE = #{roomPrice},
+		ROOM_CAPACITY = #{roomCapacity},
+		ROOM_CHECKIN = #{roomCheckIn},
+		ROOM_CHECKOUT = #{roomCheckOut}
+		WHERE ACC_CODE =
+		#{accCode}
+	</update>
+
+	<select id="getRoomList" resultMap="room_rm">
+		SELECT * FROM ACC_GRADE
+		WHERE
+		ACC_NO = #{accNo}
+		ORDER BY ACC_CODE DESC
+	</select>
+
+	<select id="getRoomCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		ACC_GRADE
+		WHERE ACC_NO = #{accNo}
+	</select>
+
+	<insert id="insertRooms">
+		INSERT INTO ACC_GRADE (ACC_CODE, ACC_TYPE, ROOM_PRICE, ROOM_CAPACITY,
+		ROOM_CHECKIN, ROOM_CHECKOUT, ACC_NO)
+		VALUES (
+		(SELECT NVL(MAX(ACC_CODE), 0) + 1 FROM ACC_GRADE),
+		#{accType},
+		#{roomPrice},
+		#{roomCapacity},
+		#{roomCheckIn},
+		#{roomCheckOut},
+		#{accNo}
+		)
+	</insert>
+
+	<!-- 방삭제 -->
+	<delete id="deleteRoom">
+		DELETE
+		FROM "ACC_GRADE"
+		WHERE ACC_CODE = ${accCode}
+	</delete>
+
+	<select id="checkRESN" resultType="_int">
+		SELECT COUNT(*)
+		FROM "ACC_RESERVATION" ARESN
+		JOIN "ACC_GRADE" AG ON AG.ACC_CODE = ARESN.ACC_CODE
+		JOIN "RESERVATION" RESN ON RESN.RESERVATION_NO =
+		ARESN.RESERVATION_NO
+		WHERE AG.ACC_CODE = ${accCode}
+	</select>
+
+	<!-- 통계 데이터 얻어오기 -->
+	<select id="getStatsData" resultMap="stats_rm">
+		SELECT
+		AG.ACC_NO,
+		AG.ROOM_PRICE ,
+		A.ACC_NAME,
+		RESN.RESERV_START_DATE ,
+		RESN.RESERV_END_DATE,
+		ARESN.RES_PEOPLE
+		FROM "ACC_RESERVATION" ARESN
+		JOIN "ACC_GRADE" AG ON
+		AG.ACC_CODE = ARESN.ACC_CODE
+		JOIN "ACC" A ON A.ACC_NO = AG.ACC_NO
+		JOIN "RESERVATION" RESN ON RESN.RESERVATION_NO = ARESN.RESERVATION_NO
+		WHERE AG.ACC_NO = ${accNo}
+		AND (
+		SUBSTR(RESN.RESERV_START_DATE, 1,
+		4) = TO_CHAR(SYSDATE, 'YYYY')
+		OR
+		SUBSTR(RESN.RESERV_START_DATE, 1, 4) = TO_CHAR(ADD_MONTHS(SYSDATE, -12), 'YYYY')
+		OR
+		SUBSTR(RESN.RESERV_START_DATE, 1, 4) = TO_CHAR(ADD_MONTHS(SYSDATE, -24), 'YYYY')
+		)
+		ORDER BY RESERV_START_DATE
+	</select>
+
+
+
+</mapper>

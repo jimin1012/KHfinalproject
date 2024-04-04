@@ -1,0 +1,158 @@
+*{box-sizing: border-box;}
+body{margin: 0 auto;}
+/* 제일 큰 감싸는 영역 */
+.wrap{
+    /* 최소값만 정한이유는 안에 요소크기에 맞게 크기가 더 늘어날 수 있게 하려고 */
+    min-width: 1200px; /* min-width : 최소 width */
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* main */
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.main-content{
+    width: 450px;
+    /* background-color: rgba(233, 232, 232,0.8); */
+}
+
+.main-login{
+    text-align: center;
+}
+.main-login>h2{
+    font-size: 38px;
+    color: rgb(0, 67, 112);
+}
+
+#errorMsg{
+	width:80%;
+    height: 20px;
+    line-height: 20px;
+	background-color: #ff6060;
+    color: white;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.login-form>fieldset{
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    align-items: center;
+}
+
+#userId{
+    width: 80%;
+    height: 45px;
+    font-size: 16px;
+    padding-left: 10px;
+    
+}
+#password{
+    width: 80%;
+    height: 45px;
+    margin-top: 15px;
+    /* margin-bottom: 55px; */
+    font-size: 16px;
+    padding-left: 10px;
+}
+#login-btn{
+    margin-top: 50px;
+    width: 80%;
+    height: 55px;
+    background-color: rgb(0, 67, 112);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.main-option{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.main-option >div:first-child{
+    width: 80%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.main-option >div:first-child span{
+    font-size: 14px;
+    color: #777;
+}
+.main-option >div:first-child span >a{
+    color: black;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.sns-login{
+    
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sns-login > div:first-child{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+.sns-login > div:first-child>span{
+    font-size: 11px;
+    margin: 0 10px;
+}
+.line{
+    flex-basis: 35%;
+}
+
+.sns-login > div:last-child{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.sns-login > div:last-child > div:nth-child(1){
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-size: 12px;
+}   
+.sns-login > div:last-child > div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+#kakaoLogin>img{
+    width: 30px;
+    height: auto;
+}
+#naverIdLogin_loginButton>img{
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+}

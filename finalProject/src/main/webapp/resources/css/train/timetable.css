@@ -1,0 +1,131 @@
+
+main{
+    width:1150px;
+    margin: auto;
+}
+
+main *{
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    
+}
+
+
+#info-msg{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}
+#trainInformation{
+
+    width: 1200px;
+    margin-top: 50px;
+
+    height: 150px;
+    padding: 5px;
+    background-color: rgb(0, 67, 112);
+    color: white;
+}
+
+#date{
+    margin-left: 30px;
+    
+    height: 30px;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#trainInfo > div:nth-child(2){
+    height: 110px;
+    display: flex;
+}
+
+#destination{
+    height: 100%;
+    width: 20%;    
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#destination >span{
+    padding-top: 15px;
+    font-weight: 3em;
+}
+
+
+.des{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid white ;
+
+    text-align: center;
+    padding-top: 27px;
+    font-weight: bold;
+}
+
+#priceInfo{
+
+
+    text-decoration: underline;
+    padding-top: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#timeCon{
+    width: 1200px;
+    margin: 50px auto;
+    border: 2px solid rgb(0, 67, 112);
+    
+}
+#timetable{
+   
+    overflow-y: auto; /* 수직 스크롤 표시 */
+    max-height: 700px; /* 테이블의 최대 높이 설정 */
+    
+    
+}
+
+
+table{
+    width: 1150px;
+    /* border: 2px solid rgb(0, 67, 112);; */
+    margin-bottom: 60px;
+}
+
+thead{
+    height: 3em;
+}
+
+
+tbody >tr{
+    height: 4em;
+    text-align: center;
+}
+
+
+.checkBtn{
+    width: 60px;
+    height: 30px;
+    border-radius: 5px;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(0, 67, 112);
+    background-color: white;
+    border: 3px solid rgb(0, 67, 112);
+    cursor: pointer;
+}
+
+.checkBtn:hover{
+    background-color: rgb(0, 67, 112);
+    color: white;
+}
+
+
+.disNone{
+    display: none;
+}

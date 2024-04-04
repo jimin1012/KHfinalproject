@@ -1,0 +1,414 @@
+/* 경기천년 */
+@charset "UTF-8";
+
+@font-face {
+    font-family: NanumSquareL;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareL.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareR;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareR.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareB.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: NanumSquareEB;
+    font-weight: 400;
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot);
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.eot?#iefix) format("embedded-opentype");
+    src: url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff2) format("woff2"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.woff) format("woff"), url(https://ssl.pstatic.net/static/nid/webfont/NanumSquareEB.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 폰트: 경기천년체 제목 바탕 */
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+main {
+    background-color: rgba(0, 67, 112, 0.041);
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    /*  */
+    font-size: 24px;
+}
+
+/* 사이드메뉴 + 본내용 */
+.page-container {
+    top: 0;
+
+    display: flex;
+    position: relative;
+    margin: 0, 355px, 0, 355px;
+}
+
+.page-container::before {
+    content: "";
+    display: block;
+    position: absolute;
+    /* .page-container 대비 절대 위치를 지정합니다. */
+    top: 0;
+    left: -29%;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background-color: white;
+    /* 배경색을 하얗게 설정합니다. */
+    z-index: 1;
+    /* .page-container의 내용 뒤에 배치합니다. */
+}
+
+.content-container {
+    margin: 25px;
+    min-width: 800px;
+    height: 100%;
+    /* box-shadow: 2px 2px 14px 0 rgba(0, 67, 112, 0.726); */
+}
+
+/*  */
+hr {
+    border: 0;
+    /* 기존 테두리를 제거합니다. */
+    height: 2px;
+    /* 선의 두께를 정합니다. */
+    background-color: rgba(0, 67, 112, 0.068);
+    /* 선의 색상을 정합니다. */
+}
+
+input:focus {
+    background-color: rgba(96, 174, 226, 0.068);
+}
+
+span {}
+
+/* span태그 , input태그 시작 위치 */
+section:nth-child(1) span,
+section:nth-child(1) input {
+
+    width: 66%;
+    height: 24px;
+    float: right;
+
+}
+
+/* 계좌 변경 구간 */
+.business-account-input {
+    display: none;
+}
+
+#change-account {
+    display: none;
+}
+
+div.business-account>input {
+    border: none;
+    border-bottom: 2px solid rgba(0, 67, 112, 0.705);
+    font-size: 20px;
+    outline: none;
+
+}
+
+
+
+/* 정산계좌 변경 */
+.change-account-area {
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+}
+
+.change-account-area>button {
+    width: 25%;
+    height: 30px;
+
+    font-size: 15px;
+    font-family: NanumSquareR;
+    background-color: rgba(0, 67, 112, 0.705);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.change-account-area>button:hover {
+    background-color: rgb(0, 67, 112);
+    color: white;
+    transition-duration: 0.3s;
+
+}
+
+/* 2번째 section span input---- */
+section:nth-child(2) span {
+    width: 52%;
+    height: 32px;
+    float: right;
+    overflow-y: auto;
+}
+
+section:nth-child(2)>div>div.acc-tel>input {
+    width: 52%;
+    height: 24px;
+    float: right;
+
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0, 67, 112, 0.705);
+
+    font-size: 20px;
+}
+
+input[name="Address"] {
+    width: 99%;
+    height: 22px;
+    float: right;
+    margin: 12px 0;
+
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0, 67, 112, 0.705);
+
+    font-size: 20px;
+}
+
+/* ------------  */
+
+
+/* 주소 변경 버튼 */
+.acc-addr {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.acc-addr>button {
+    width: 20%;
+    height: 30px;
+    margin-left: 20px;
+
+    font-size: 18px;
+    font-family: NanumSquareB;
+    background-color: rgba(0, 67, 112, 0.705);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.acc-addr>button:hover {
+    background-color: rgb(0, 67, 112);
+    color: white;
+    transition-duration: 0.3s;
+}
+
+
+/* 대표자명, 사업자번호, 정산계좌 */
+.business-section {
+    background-color: #fff;
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+    box-shadow: 2px 2px 14px 0 rgba(0, 67, 112, 0.315);
+    border: rgba(0, 67, 112, 0.726);
+    background-color: #fff;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* 정산계좌 변경  버튼 */
+.business-section>button {
+    height: 50px;
+    width: 100px;
+    position: relative;
+}
+
+.business-div {
+    height: 100%;
+    width: 65%;
+
+    margin-top: 60px;
+    margin-bottom: 25px;
+}
+
+label {
+    color: rgb(0, 67, 112);
+}
+
+
+
+/* 상호,개업년월일,전화번호,숙소 영업상태  section */
+.accInfo-section {
+
+    background-color: #fff;
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+    box-shadow: 2px 2px 14px 0 rgba(0, 67, 112, 0.315);
+    border: rgba(0, 67, 112, 0.726);
+    background-color: #fff;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* 상호,개업년월일..etc주소 내부 div */
+.acc-info-div {
+    height: 100%;
+    width: 65%;
+
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.acc-name label {
+    padding-left: 11%;
+}
+
+.acc-state {
+    display: flex;
+    align-items: center;
+}
+
+.acc-state select {
+    margin-left: 90px;
+    height: 30px;
+}
+
+.info-change-area {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 50px;
+
+}
+
+.info-change-area>button {
+    width: 100%;
+    height: 45px;
+    font-size: 20px;
+
+    background-color: rgb(0, 67, 112);
+    font-family: NanumSquareB;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.info-change-area>button:active {
+    transform: scale(0.9);
+    transition-duration: 0.7s;
+}
+
+
+/* -----------------------room */
+test {
+    background-color: #fff;
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+    box-shadow: 2px 2px 14px 0 rgba(0, 67, 112, 0.315);
+    border: rgba(0, 67, 112, 0.726);
+    background-color: #fff;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+}
+
+.room-count-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    padding: 50px;
+}
+
+.room-count-div table {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+    line-height: 4;
+    margin: 0;
+    padding: 0;
+
+    text-align: center;
+    /* 수평 중앙 정렬 */
+    vertical-align: middle;
+    /* 수직 중앙 정렬 */
+}
+
+th {
+    font-family: NanumSquareL;
+    color: rgb(0, 67, 112);
+}
+
+td input {
+    width: 120px;
+    height: 30px;
+    box-sizing: border-box;
+    align-items: center;
+
+    border: none;
+    border-bottom: 2px solid #cac9c9;
+
+    outline: none;
+
+    font-size: 20px;
+    text-align: center;
+}
+
+tbody button {
+    margin-left: 10px;
+    margin-bottom: 40px;
+    width: 80px;
+    height: 53.57px;
+
+    font-family: NanumSquareB;
+    background-color: rgba(0, 67, 112, 0.705);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+tbody button:hover {
+    background-color: rgba(0, 67, 112, 0.253);
+    color: rgb(0, 67, 112);
+    transition-duration: 0.3s;
+}

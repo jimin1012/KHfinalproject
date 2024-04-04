@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="messageMapper">
+
+	<!-- 쪽지 -->
+	<resultMap type="Message" id="message_rm">
+		<id property="messageNo" column="MESSAGE_NO"/>
+		<result property="messageContent" column="MESSAGE_CONTENT"/>
+		<result property="messageCreateDate" column="M_CREATE_DATE"/>
+		<result property="messageDelFlag" column="MESSAGE_DEL_FL"/>
+		<result property="senderNo" column="SENDER_NO"/>
+		<result property="recieverNo" column="RECIEVER_NO"/>
+	</resultMap>
+
+	<!-- 쪽지 전송 -->
+	<insert id="sendMessage">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="messageNo">
+			SELECT SEQ_MESSAGE_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO "MESSAGE"
+		VALUES (#{messageNo}, #{messageContent}, DEFAULT, DEFAULT, #{senderNo}, #{recieverNo})
+	</insert>
+
+	<!-- 쪽지 삭제 -->
+	<update id="deleteMessage">
+		UPDATE MESSAGE SET MESSAGE_DEL_FL = 'Y'
+		WHERE MESSAGE_NO IN 
+		<foreach collection="array" item="arr" open="(" close=")" separator=",">
+			#{arr}
+		</foreach>
+	</update>
+
+</mapper>
