@@ -23,7 +23,7 @@ kh 정보 교육원에서 진행한 파이널 프로젝트
          <li><a href="https://amplified-success-14b.notion.site/65c6493152074601bf0f74df2003a6a6">화면 참조</a></li>
      </ul>
      <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;">ERD </h2> <br> 
-     <img src="https://file.notion.so/f/f/9ea9ba60-1184-44bf-b0b7-c58d1b73dd6a/14f7529b-5941-4f9e-858a-1edc9ba656a3/Untitled.png?id=5c93140f-1f4f-4186-aae5-66ebdf4532e3&table=block&spaceId=9ea9ba60-1184-44bf-b0b7-c58d1b73dd6a&expirationTimestamp=1718344800000&signature=m45epEEmAAnvcBl_LTHG6_F4XII1BtXl2QIYAWZ9URI&downloadName=Untitled.png">
+     <img src="https://file.notion.so/f/f/9ea9ba60-1184-44bf-b0b7-c58d1b73dd6a/050ad074-0f01-4b4e-a065-46c89571788b/Untitled.png?id=4b155dd7-65fa-45f5-8890-e95a8ec90716&table=block&spaceId=9ea9ba60-1184-44bf-b0b7-c58d1b73dd6a&expirationTimestamp=1718352000000&signature=I7RR-JFjEEW0ZRbqaRw0OmIvZQtsBb25iViaFHG-sGk&downloadName=Untitled.png">
      <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> SQL문 </h2> <br>
      <details>
          <summary>
