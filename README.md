@@ -2733,7 +2733,7 @@ commit;
 <br>
 <br>
  <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;"> notion 주소 </h2>
- <span><a href="https://amplified-success-14b.notion.site/8853f975f871414a852773459256657a">세미프로젝트</a></span>
+ <span><a href="https://amplified-success-14b.notion.site/a3445b612961432cb2ecd4ea10391f99">파이널 프로젝트</a></span>
  <br>
  <br>
  <br>
